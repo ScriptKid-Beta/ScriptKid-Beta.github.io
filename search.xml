@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>test</title>
+    <url>/2020/03/31/test/</url>
+    <content><![CDATA[<p><img src="../img/test/image-20200331104503616.png" alt="image-20200331104503616"></p>
+<p><img src="test/image-20200331105919456.png" alt="image-20200331105919456"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>历史文章</title>
     <url>/2020/03/29/History/</url>
     <content><![CDATA[<p>&emsp;&emsp;因之前文章采用云图床导致文章大部分挂链，现将部分历史文章进行pdf存档，后续文章采用本地图床。</p>
