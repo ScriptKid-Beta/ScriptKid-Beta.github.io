@@ -401,39 +401,17 @@
 
       
         
-          
-            <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
 <div style="text-align: right"> 小维</div>
 
 <h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">操作系统：Ce<span class="symbol">ntos7</span></span><br><span class="line">管理工具：Xshell</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Socks5"><a href="#Socks5" class="headerlink" title="Socks5"></a>Socks5</h3><h4 id="Socks5安装"><a href="#Socks5安装" class="headerlink" title="Socks5安装"></a>Socks5安装</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖项</span></span><br><span class="line">yum <span class="keyword">install</span> gcc openldap-devel pam-devel openssl-devel -y</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="comment">//nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span></span><br><span class="line">tar -xzvf ss5<span class="number">-3.8</span><span class="number">.9</span><span class="number">-8.</span>tar.gz</span><br><span class="line">cd ss5<span class="number">-3.8</span><span class="number">.9</span></span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214505383.png" alt="image-20200404214505383"></p>
-<h4 id="Socks5配置"><a href="#Socks5配置" class="headerlink" title="Socks5配置"></a>Socks5配置</h4><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">opt</span>/ss5/ss5.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – -</span><br><span class="line">改为</span><br><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – u</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">permit – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br><span class="line">改为</span><br><span class="line">permit u <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192600090.png" alt="image-20200404192600090"></p>
-<h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>opt<span class="regexp">/ss5/</span>ss5.passwd</span><br><span class="line">格式：[用户名] [密码] <span class="comment">#一个用户一行</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192352676.png" alt="image-20200404192352676"></p>
-<h5 id="Socks5-启动"><a href="#Socks5-启动" class="headerlink" title="Socks5 启动"></a>Socks5 启动</h5><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ss5 <span class="literal">start</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h5><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service ss5 stutas <span class="comment"># 服务状态</span></span><br><span class="line">netstat -lntp  | <span class="keyword">grep</span> ss5 <span class="comment">#网络连接 </span></span><br><span class="line">注：安全策略需要放行对应的端口策略</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192302483.png" alt="image-20200404192302483"></p>
-<h4 id="客户端连接验证"><a href="#客户端连接验证" class="headerlink" title="客户端连接验证"></a>客户端连接验证</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 xx.xx.xx.<span class="string">xx:</span><span class="number">1080</span> --proxy-user <span class="string">user:</span>password <span class="string">http:</span><span class="comment">//ipinfo.io/ip</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214334247.png" alt="image-20200404214334247"></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/04/Centos7%E6%90%AD%E5%BB%BASocks5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

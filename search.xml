@@ -8,7 +8,7 @@
 
 <h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">操作系统：Ce<span class="symbol">ntos7</span></span><br><span class="line">管理工具：Xshell</span><br></pre></td></tr></table></figure>
 
-
+<a id="more"></a>
 
 <h3 id="Socks5"><a href="#Socks5" class="headerlink" title="Socks5"></a>Socks5</h3><h4 id="Socks5安装"><a href="#Socks5安装" class="headerlink" title="Socks5安装"></a>Socks5安装</h4><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装依赖项</span></span><br><span class="line">yum <span class="keyword">install</span> gcc openldap-devel pam-devel openssl-devel -y</span><br></pre></td></tr></table></figure>
 
