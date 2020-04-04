@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Centos7搭建Socks5</title>
+    <url>/2020/04/04/Centos7%E6%90%AD%E5%BB%BASocks5/</url>
+    <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">操作系统：Ce<span class="symbol">ntos7</span></span><br><span class="line">管理工具：Xshell</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Socks5"><a href="#Socks5" class="headerlink" title="Socks5"></a>Socks5</h3><h4 id="Socks5安装"><a href="#Socks5安装" class="headerlink" title="Socks5安装"></a>Socks5安装</h4><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装依赖项</span></span><br><span class="line">yum <span class="keyword">install</span> gcc openldap-devel pam-devel openssl-devel -y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">wget http:<span class="comment">//nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span></span><br><span class="line">tar -xzvf ss5<span class="number">-3.8</span><span class="number">.9</span><span class="number">-8.</span>tar.gz</span><br><span class="line">cd ss5<span class="number">-3.8</span><span class="number">.9</span></span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214505383.png" alt="image-20200404214505383"></p>
+<h4 id="Socks5配置"><a href="#Socks5配置" class="headerlink" title="Socks5配置"></a>Socks5配置</h4><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">opt</span>/ss5/ss5.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – -</span><br><span class="line">改为</span><br><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – u</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">permit – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br><span class="line">改为</span><br><span class="line">permit u <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192600090.png" alt="image-20200404192600090"></p>
+<h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>opt<span class="regexp">/ss5/</span>ss5.passwd</span><br><span class="line">格式：[用户名] [密码] <span class="comment">#一个用户一行</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192352676.png" alt="image-20200404192352676"></p>
+<h5 id="Socks5-启动"><a href="#Socks5-启动" class="headerlink" title="Socks5 启动"></a>Socks5 启动</h5><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">service ss5 <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h5><figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">service ss5 stutas <span class="comment"># 服务状态</span></span><br><span class="line">netstat -lntp  | <span class="keyword">grep</span> ss5 <span class="comment">#网络连接 </span></span><br><span class="line">注：安全策略需要放行对应的端口策略</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192302483.png" alt="image-20200404192302483"></p>
+<h4 id="客户端连接验证"><a href="#客户端连接验证" class="headerlink" title="客户端连接验证"></a>客户端连接验证</h4><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">curl --socks5 xx.xx.xx.<span class="string">xx:</span><span class="number">1080</span> --proxy-user <span class="string">user:</span>password <span class="string">http:</span><span class="comment">//ipinfo.io/ip</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214334247.png" alt="image-20200404214334247"></p>
+]]></content>
+      <tags>
+        <tag>Socks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>公众号文章爬虫并生成PDF+HTML</title>
+    <url>/2020/04/04/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/</url>
+    <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>&emsp;&emsp;因某些原因会导致一些公众号的文章会给发布者删除，所以就就想着把公众号的文章进行爬虫到本地进行留档。</p>
+<a id="more"></a>
+
+<h3 id="爬虫方法"><a href="#爬虫方法" class="headerlink" title="爬虫方法"></a>爬虫方法</h3><p>目前我了解的爬取微信公众号的方法主要是四种：</p>
+<p>1、第三方的公众号聚合网站（如：weixin.sogou.com）；</p>
+<p>2、网页版微信（现已无法限制登陆了）；</p>
+<p>3、微信程序访问公众号文章的接口；</p>
+<p>4、公众号平台引用文章接口（需要申请公众号）。</p>
+<p>这里我们采用公众号平台引用文章接口的方式去实现。</p>
+<h3 id="通过公众号平台引用文章接口爬虫思路"><a href="#通过公众号平台引用文章接口爬虫思路" class="headerlink" title="通过公众号平台引用文章接口爬虫思路"></a>通过公众号平台引用文章接口爬虫思路</h3><h4 id="引用文章接口"><a href="#引用文章接口" class="headerlink" title="引用文章接口"></a>引用文章接口</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![image-20200404122132481](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404122132481.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">通过网络请求，我们可以看到我们需要的一些数据（文章链接、标题等），如图：</span><br><span class="line"></span><br><span class="line">![image-20200404122534217](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404122534217.png)</span><br><span class="line"></span><br><span class="line">#### 流程设计</span><br><span class="line"></span><br><span class="line">![image-20200404191340454](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404191340454.png)</span><br><span class="line"></span><br><span class="line">#### 程序</span><br><span class="line"></span><br><span class="line">这里就不做过程的一些分析了，所以直接贴EXE的可执行程序了（代码写的太垃圾了，就不放源码了）。</span><br><span class="line"></span><br><span class="line">GitHub地址：https:&#x2F;&#x2F;github.com&#x2F;ScriptKid-Beta&#x2F;Wechat_Articles_Spider</span><br><span class="line"></span><br><span class="line">##### 使用</span><br><span class="line"></span><br><span class="line">安装wkhtmltopdf：</span><br><span class="line"></span><br><span class="line">下载wkhtmltopdf：https:&#x2F;&#x2F;wkhtmltopdf.org&#x2F;downloads.html  </span><br><span class="line"></span><br><span class="line">![image-20200404180406270](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404180406270.png)</span><br><span class="line"></span><br><span class="line">将下载好的wkhtmltox-0.12.5-1.mxe-cross-win64 文件解压缩并放到跟程序同一个目录，如图：</span><br><span class="line"></span><br><span class="line">![image-20200404184015589](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404184015589.png)</span><br><span class="line"></span><br><span class="line">安装chromedriver：</span><br></pre></td></tr></table></figure>
+<p>#查看版本信息<br>浏览器中输入：chrome://version/ </p>
+<p>```</p>
+<p>chromedriver的版本一定要与Chrome的版本一致，不然可能就不起作用。</p>
+<p>下载链接：</p>
+<p><a href="https://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/</a></p>
+<p><a href="http://chromedriver.storage.googleapis.com/index.html" target="_blank" rel="noopener">http://chromedriver.storage.googleapis.com/index.html</a></p>
+<p>下载好放在跟程序同一目录下即可。</p>
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404183023403.png" alt="image-20200404183023403"></p>
+<p>双击打开wechat_pdf.exe程序运行。</p>
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404191021202.png" alt="image-20200404191021202"></p>
+<h5 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h5><p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404190937280.png" alt="image-20200404190937280"></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://mp.weixin.qq.com/s/67sk-uKz9Ct4niT-f4u1KA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/67sk-uKz9Ct4niT-f4u1KA</a>?</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMDM4MTA2MA==&amp;mid=2455304609&amp;idx=1&amp;sn=b7496563aab42e92060bd68936bc4212&amp;chksm=8cfd6bcabb8ae2dc606b060fecf3f837177e3ef22a05a30ee28ebefd75c6677b29df3e426692&amp;token=2137480545&amp;lang=zh_CN#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzAxMDM4MTA2MA==&amp;mid=2455304609&amp;idx=1&amp;sn=b7496563aab42e92060bd68936bc4212&amp;chksm=8cfd6bcabb8ae2dc606b060fecf3f837177e3ef22a05a30ee28ebefd75c6677b29df3e426692&amp;token=2137480545&amp;lang=zh_CN#rd</a></p>
+]]></content>
+      <tags>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>内网渗透-VPN密码获取小技巧</title>
     <url>/2020/03/31/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-VPN%E5%AF%86%E7%A0%81%E8%8E%B7%E5%8F%96/</url>
     <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>

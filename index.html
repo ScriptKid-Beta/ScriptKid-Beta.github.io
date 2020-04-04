@@ -300,6 +300,348 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/04/04/Centos7%E6%90%AD%E5%BB%BASocks5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/04/Centos7%E6%90%AD%E5%BB%BASocks5/" itemprop="url">Centos7搭建Socks5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T15:45:02+08:00">
+                2020-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  247字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">操作系统：Ce<span class="symbol">ntos7</span></span><br><span class="line">管理工具：Xshell</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Socks5"><a href="#Socks5" class="headerlink" title="Socks5"></a>Socks5</h3><h4 id="Socks5安装"><a href="#Socks5安装" class="headerlink" title="Socks5安装"></a>Socks5安装</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖项</span></span><br><span class="line">yum <span class="keyword">install</span> gcc openldap-devel pam-devel openssl-devel -y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="comment">//nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span></span><br><span class="line">tar -xzvf ss5<span class="number">-3.8</span><span class="number">.9</span><span class="number">-8.</span>tar.gz</span><br><span class="line">cd ss5<span class="number">-3.8</span><span class="number">.9</span></span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214505383.png" alt="image-20200404214505383"></p>
+<h4 id="Socks5配置"><a href="#Socks5配置" class="headerlink" title="Socks5配置"></a>Socks5配置</h4><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">opt</span>/ss5/ss5.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – -</span><br><span class="line">改为</span><br><span class="line">auth <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – u</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">permit – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br><span class="line">改为</span><br><span class="line">permit u <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> – <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span> - - - - -</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192600090.png" alt="image-20200404192600090"></p>
+<h5 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>opt<span class="regexp">/ss5/</span>ss5.passwd</span><br><span class="line">格式：[用户名] [密码] <span class="comment">#一个用户一行</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192352676.png" alt="image-20200404192352676"></p>
+<h5 id="Socks5-启动"><a href="#Socks5-启动" class="headerlink" title="Socks5 启动"></a>Socks5 启动</h5><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ss5 <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h5><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service ss5 stutas <span class="comment"># 服务状态</span></span><br><span class="line">netstat -lntp  | <span class="keyword">grep</span> ss5 <span class="comment">#网络连接 </span></span><br><span class="line">注：安全策略需要放行对应的端口策略</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192302483.png" alt="image-20200404192302483"></p>
+<h4 id="客户端连接验证"><a href="#客户端连接验证" class="headerlink" title="客户端连接验证"></a>客户端连接验证</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 xx.xx.xx.<span class="string">xx:</span><span class="number">1080</span> --proxy-user <span class="string">user:</span>password <span class="string">http:</span><span class="comment">//ipinfo.io/ip</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214334247.png" alt="image-20200404214334247"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/04/04/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/04/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/" itemprop="url">公众号文章爬虫并生成PDF+HTML</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T11:51:37+08:00">
+                2020-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  683字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>&emsp;&emsp;因某些原因会导致一些公众号的文章会给发布者删除，所以就就想着把公众号的文章进行爬虫到本地进行留档。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/04/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/03/31/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-VPN%E5%AF%86%E7%A0%81%E8%8E%B7%E5%8F%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1039,7 +1381,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1061,7 +1403,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
