@@ -90,15 +90,20 @@
 <meta property="og:url" content="https://scriptkid-beta.github.io/2020/04/04/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/index.html">
 <meta property="og:site_name" content="小维的博客">
 <meta property="og:description" content="本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。  小维  写在前面&amp;emsp;&amp;emsp;因某些原因会导致一些公众号的文章会给发布者删除，所以就就想着把公众号的文章进行爬虫到本地进行留档。">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404122132481.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404122534217.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404191340454.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404180406270.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404184015589.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404183023403.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404191021202.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404190937280.png">
 <meta property="article:published_time" content="2020-04-04T03:51:37.042Z">
-<meta property="article:modified_time" content="2020-04-04T15:22:26.776Z">
+<meta property="article:modified_time" content="2020-04-04T15:26:01.197Z">
 <meta property="article:author" content="小维同学">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404183023403.png">
+<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404122132481.png">
 
 
 
@@ -366,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  683字
+                  503字
                 </span>
               
 
@@ -382,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  1分钟
                 </span>
               
             </div>
@@ -415,9 +420,22 @@
 <p>3、微信程序访问公众号文章的接口；</p>
 <p>4、公众号平台引用文章接口（需要申请公众号）。</p>
 <p>这里我们采用公众号平台引用文章接口的方式去实现。</p>
-<h3 id="通过公众号平台引用文章接口爬虫思路"><a href="#通过公众号平台引用文章接口爬虫思路" class="headerlink" title="通过公众号平台引用文章接口爬虫思路"></a>通过公众号平台引用文章接口爬虫思路</h3><h4 id="引用文章接口"><a href="#引用文章接口" class="headerlink" title="引用文章接口"></a>引用文章接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![image-20200404122132481](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404122132481.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">通过网络请求，我们可以看到我们需要的一些数据（文章链接、标题等），如图：</span><br><span class="line"></span><br><span class="line">![image-20200404122534217](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404122534217.png)</span><br><span class="line"></span><br><span class="line">#### 流程设计</span><br><span class="line"></span><br><span class="line">![image-20200404191340454](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404191340454.png)</span><br><span class="line"></span><br><span class="line">#### 程序</span><br><span class="line"></span><br><span class="line">这里就不做过程的一些分析了，所以直接贴EXE的可执行程序了（代码写的太垃圾了，就不放源码了）。</span><br><span class="line"></span><br><span class="line">GitHub地址：https:&#x2F;&#x2F;github.com&#x2F;ScriptKid-Beta&#x2F;Wechat_Articles_Spider</span><br><span class="line"></span><br><span class="line">##### 使用</span><br><span class="line"></span><br><span class="line">安装wkhtmltopdf：</span><br><span class="line"></span><br><span class="line">下载wkhtmltopdf：https:&#x2F;&#x2F;wkhtmltopdf.org&#x2F;downloads.html  </span><br><span class="line"></span><br><span class="line">![image-20200404180406270](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404180406270.png)</span><br><span class="line"></span><br><span class="line">将下载好的wkhtmltox-0.12.5-1.mxe-cross-win64 文件解压缩并放到跟程序同一个目录，如图：</span><br><span class="line"></span><br><span class="line">![image-20200404184015589](&#x2F;img&#x2F;%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML&#x2F;image-20200404184015589.png)</span><br><span class="line"></span><br><span class="line">安装chromedriver：</span><br></pre></td></tr></table></figure>
-<p>#查看版本信息<br>浏览器中输入：chrome://version/ </p>
-<p>```</p>
+<h3 id="通过公众号平台引用文章接口爬虫思路"><a href="#通过公众号平台引用文章接口爬虫思路" class="headerlink" title="通过公众号平台引用文章接口爬虫思路"></a>通过公众号平台引用文章接口爬虫思路</h3><h4 id="引用文章接口"><a href="#引用文章接口" class="headerlink" title="引用文章接口"></a>引用文章接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">登陆公众号&gt;&gt;首页&gt;&gt;新建群发&gt;&gt;自建图文&gt;&gt;超链接</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404122132481.png" alt="image-20200404122132481"></p>
+<p>通过网络请求，我们可以看到我们需要的一些数据（文章链接、标题等），如图：</p>
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404122534217.png" alt="image-20200404122534217"></p>
+<h4 id="流程设计"><a href="#流程设计" class="headerlink" title="流程设计"></a>流程设计</h4><p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404191340454.png" alt="image-20200404191340454"></p>
+<h4 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h4><p>这里就不做过程的一些分析了，所以直接贴EXE的可执行程序了（代码写的太垃圾了，就不放源码了）。</p>
+<p>GitHub地址：<a href="https://github.com/ScriptKid-Beta/Wechat_Articles_Spider" target="_blank" rel="noopener">https://github.com/ScriptKid-Beta/Wechat_Articles_Spider</a></p>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>安装wkhtmltopdf：</p>
+<p>下载wkhtmltopdf：<a href="https://wkhtmltopdf.org/downloads.html" target="_blank" rel="noopener">https://wkhtmltopdf.org/downloads.html</a>  </p>
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404180406270.png" alt="image-20200404180406270"></p>
+<p>将下载好的wkhtmltox-0.12.5-1.mxe-cross-win64 文件解压缩并放到跟程序同一个目录，如图：</p>
+<p><img src="/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%88%AC%E8%99%AB%E5%B9%B6%E7%94%9F%E6%88%90PDF+HTML/image-20200404184015589.png" alt="image-20200404184015589"></p>
+<p>安装chromedriver：</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#查看版本信息</span></span><br><span class="line">浏览器中输入：chrome:<span class="comment">//version/</span></span><br></pre></td></tr></table></figure>
+
 <p>chromedriver的版本一定要与Chrome的版本一致，不然可能就不起作用。</p>
 <p>下载链接：</p>
 <p><a href="https://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/</a></p>
@@ -666,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫方法"><span class="nav-text">爬虫方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过公众号平台引用文章接口爬虫思路"><span class="nav-text">通过公众号平台引用文章接口爬虫思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用文章接口"><span class="nav-text">引用文章接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#效果"><span class="nav-text">效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-text">参考文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫方法"><span class="nav-text">爬虫方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过公众号平台引用文章接口爬虫思路"><span class="nav-text">通过公众号平台引用文章接口爬虫思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用文章接口"><span class="nav-text">引用文章接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程设计"><span class="nav-text">流程设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#程序"><span class="nav-text">程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用"><span class="nav-text">使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#效果"><span class="nav-text">效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-text">参考文章</span></a></li></ol></div>
             
 
           </div>
