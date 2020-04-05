@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404192302483.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214334247.png">
 <meta property="article:published_time" content="2020-04-04T07:45:02.038Z">
-<meta property="article:modified_time" content="2020-04-04T15:15:33.957Z">
+<meta property="article:modified_time" content="2020-04-05T02:57:11.085Z">
 <meta property="article:author" content="小维同学">
 <meta property="article:tag" content="Socks">
 <meta name="twitter:card" content="summary">
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  247字
+                  265字
                 </span>
               
 
@@ -414,7 +414,7 @@
 
 <h3 id="Socks5"><a href="#Socks5" class="headerlink" title="Socks5"></a>Socks5</h3><h4 id="Socks5安装"><a href="#Socks5安装" class="headerlink" title="Socks5安装"></a>Socks5安装</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖项</span></span><br><span class="line">yum <span class="keyword">install</span> gcc openldap-devel pam-devel openssl-devel -y</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="comment">//nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span></span><br><span class="line">tar -xzvf ss5<span class="number">-3.8</span><span class="number">.9</span><span class="number">-8.</span>tar.gz</span><br><span class="line">cd ss5<span class="number">-3.8</span><span class="number">.9</span></span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="string">//nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span> <span class="comment"># 下载安装包</span></span><br><span class="line">tar -xzvf ss5-3.8.9-8.tar.gz <span class="comment"># 解压缩</span></span><br><span class="line"><span class="keyword">cd</span> ss5-3.8.9 <span class="comment"># 切换目录</span></span><br><span class="line"><span class="string">./configure</span> &amp;&amp; make &amp;&amp; make install <span class="comment"># 编译安装</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/img/Centos7%E6%90%AD%E5%BB%BASocks5/image-20200404214505383.png" alt="image-20200404214505383"></p>
 <h4 id="Socks5配置"><a href="#Socks5配置" class="headerlink" title="Socks5配置"></a>Socks5配置</h4><h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/<span class="keyword">opt</span>/ss5/ss5.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
