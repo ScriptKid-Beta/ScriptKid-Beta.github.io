@@ -16,7 +16,7 @@
 <p><img src="/img/Processon-Self-XSS/image-20200510102234719.png" alt="image-20200510102234719"></p>
 <p>文件标签处：</p>
 <p><img src="/img/Processon-Self-XSS/image-20200510102520451.png" alt="image-20200510102520451"></p>
-<p>这里就不在进一步尝试是否可以组合扩大影响测试，已反馈ProcessOn人员。</p>
+<p>这里就不在进一步尝试进行是否可以组合利用扩大影响的测试了，已将相关信息反馈ProcessOn人员。</p>
 <p><img src="/img/Processon-Self-XSS/image-20200510105215881.png" alt="image-20200510105215881"></p>
 <h4 id="写到最后"><a href="#写到最后" class="headerlink" title="写到最后"></a>写到最后</h4><p>请遵守《网络安全法》等相关法律法规。</p>
 ]]></content>
