@@ -144,8 +144,8 @@
 </tbody></table>
 <h5 id="可触发条件"><a href="#可触发条件" class="headerlink" title="可触发条件"></a>可触发条件</h5><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、可以上传Phar文件到服务端（不支持远程调用）</span><br><span class="line"><span class="number">2</span>、有可以利用的魔术方法</span><br><span class="line"><span class="number">3</span>、文件操作函数的参数可控</span><br><span class="line"><span class="number">4</span>、无过滤: / phar等特殊字符没有被过滤</span><br><span class="line">提示：</span><br><span class="line">如果有限制不可以phar:<span class="comment">//出现在头几个字符，可以使用Bzip / Gzip协议绕过</span></span><br><span class="line">Postgres、MySQL也可触发phar造成反序列化</span><br></pre></td></tr></table></figure>
 
-<h5 id="CTF案例一"><a href="#CTF案例一" class="headerlink" title="CTF案例一"></a>CTF案例一</h5><p><a href="[https://scriptkid-beta.github.io/2020/06/12/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83/#more](https://scriptkid-beta.github.io/2020/06/12/记一次CTF拉练/#more)">记一次CTF拉练</a></p>
-<h5 id="CTF案例二"><a href="#CTF案例二" class="headerlink" title="CTF案例二"></a>CTF案例二</h5><p>[SUCTF2019-Upload labs 2](<a href="https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload" target="_blank" rel="noopener">https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload</a> Labs 2)</p>
+<h5 id="CTF案例一"><a href="#CTF案例一" class="headerlink" title="CTF案例一"></a>CTF案例一</h5><p><a href="https://scriptkid-beta.github.io/2020/06/12/记一次CTF拉练/#more">记一次CTF拉练</a></p>
+<h5 id="CTF案例二"><a href="#CTF案例二" class="headerlink" title="CTF案例二"></a>CTF案例二</h5><p><a href="https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202" target="_blank" rel="noopener">SUCTF2019-Upload labs 2</a></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://paper.seebug.org/680/" target="_blank" rel="noopener">https://paper.seebug.org/680/</a></p>
 <p><a href="https://blog.zsxsoft.com/post/38" target="_blank" rel="noopener">https://blog.zsxsoft.com/post/38</a></p>
 <p><a href="https://www.php.net/manual/zh/book.phar.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/book.phar.php</a></p>
