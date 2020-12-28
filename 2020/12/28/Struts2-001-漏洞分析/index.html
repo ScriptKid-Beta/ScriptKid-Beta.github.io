@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="ZsntNucQnwgOG8NJsPVjhDxi8hx9YmTvgqa9eReuux0" />
+
+
+
+  <meta name="msvalidate.01" content="A3C088EA1884107284C9F5B94B1C667F" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="rLNDlRl5mo" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Struts2," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-001 漏洞分析在HTTP请求被Struts2处理时，首先读取web.xml文件，这个是网站配置文件，里面有个过滤器，叫：org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter然后这个过滤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2-001 漏洞分析">
+<meta property="og:url" content="https://scriptkid-beta.github.io/2020/12/28/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="小维的博客">
+<meta property="og:description" content="漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-001 漏洞分析在HTTP请求被Struts2处理时，首先读取web.xml文件，这个是网站配置文件，里面有个过滤器，叫：org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter然后这个过滤">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225113205710.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/simage-20201218102840514.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218104357386.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218111703265.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218113626884.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144456659.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144537239.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144810408.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201220153156591.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201220153226282.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218154513302.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152120932.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152528873.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152851979.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153309872.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153519551.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153626893.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153722178.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218154234294.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224171538096.png">
+<meta property="article:published_time" content="2020-12-28T10:51:49.112Z">
+<meta property="article:modified_time" content="2020-12-28T07:11:15.473Z">
+<meta property="article:author" content="小维同学">
+<meta property="article:tag" content="Struts2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225113205710.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scriptkid-beta.github.io/2020/12/28/Struts2-001-漏洞分析/"/>
+
+
+
+
+
+  <title>Struts2-001 漏洞分析 | 小维的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小维的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Python | CTF | Pentest | Note | Security</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-小维的安全导航">
+          <a href="/StartPages/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            小维的安全导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/28/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Struts2-001 漏洞分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-28T18:51:49+08:00">
+                2020-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-001" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-001</a></p>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>在HTTP请求被Struts2处理时，首先读取<code>web.xml</code>文件，这个是网站配置文件，里面有个过滤器，叫：<code>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</code>然后这个过滤器执行完之后，会经过一系列的拦截器，这些拦截器可以是默认的，也是可以用户自定义的。</p>
+<p>Struts2请求处理流程（来自攻击JavaWeb应用[5]）：</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225113205710.png" alt="image-20201225113205710"></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这里科普几个概念</span><br><span class="line">拦截器概念</span><br><span class="line">拦截器(Interceptor)是Struts2框架的核心功能之一,Struts <span class="number">2</span>是一个基于MVC设计模式的开源框架, [<span class="number">3</span>]  主要完成请求参数的解析、将页面表单参数赋给值栈中相应属性、执行功能检验、程序异常调试等工作。Struts2拦截器是一种可插拔策略,实现了面向切面的组件开发,当需要扩展功能时,只需要提供对应拦截器,并将它配置在Struts2容器中即可,如果不需要该功能时,也只需要在配置文件取消该拦截器的设置,整个过程不需要用户添加额外的代码。拦截器中更为重要的概念即拦截器栈(Interceptor Stack),拦截器栈就是Struts2中的拦截器按一定的顺序组成的一个线性链,页面发出请求,访问Action对象或方法时,栈中被设置好的拦截器就会根据堆栈的原理顺序的被调用。 </span><br><span class="line"></span><br><span class="line">说人话：struts2是框架，封装的功能都是在拦截器里面，封装很多功能，有很多拦截器，不是每次这些拦截器都执行，每次执行默认的拦截器，默认拦截器位置struts2-core<span class="number">-2.0</span><span class="number">.8</span>.jar!\struts-<span class="section">default</span>.xml，在执行拦截器，执行过程使用aop思想，在action没有直接调用拦截器方法，而是使用配置文件进行操作，在执行拦截器时候，执行很多的拦截器，这个过程使用责任链模式，例如：执行三个拦截器，执行拦截器<span class="number">1</span>-&gt;执行完放行-&gt;执行拦截器<span class="number">2</span>-&gt;执行完放行-&gt;执行拦截器<span class="number">3</span>-&gt;执行完放行-&gt;执行action方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">拦截器什么时候执行呢？</span><br><span class="line">在action对象之后，action方法执行之前</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>例如下图<code>struts.xml</code>中的<code>package</code> 继承了<code>struts</code>默认的拦截器(struts-default)，具体可以查看<code>struts-default.xml</code>文件。</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/simage-20201218102840514.png" alt="image-20201218102840514"></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218104357386.png" alt="image-20201218104357386"></p>
+<p>这里我们要关注<code>params</code>这个拦截器，代码位置：<code>xwork-2.0.3.jar!\com\opensymphony\xwork2\interceptor\ParametersInterceptor.class</code></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218111703265.png" alt="image-20201218111703265"></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218113626884.png" alt="image-20201218113626884"></p>
+<p>经过一系列的拦截器处理后，数据会成功进入实际业务 <code>Action</code>。程序会根据<code>Action</code> 处理的结果，选择对应的 <code>JSP</code>视图进行展示，并对视图中的 <code>Struts2</code> 标签进行处理。</p>
+<p>在本实例中<code>Action</code>处理用户登录是返回<code>error</code></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144456659.png" alt="image-20201218144456659"></p>
+<p>根据返回结果以及先前在<code>struts.xml</code>中定义的视图，程序将开始处理 <code>index.jsp</code></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144537239.png" alt="image-20201218144537239"></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218144810408.png" alt="image-20201218144810408"></p>
+<p>从代码里我们可以看得到，<code>struts2</code>使用了自定义标签库，也就是<code>/struts-tags</code>, 通过阅读 <code>struts2-core-2.0.8.jar!/META-INF/struts-tags.tld</code>文件，我们得知这个<code>textfield</code>标签实现类是<code>org.apache.struts2.views.jsp.ui.TextFieldTag</code></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201220153156591.png" alt="image-20201220153156591"></p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201220153226282.png" alt="image-20201220153226282"></p>
+<p>了解jsp自定义标签的同学应该知道，这时候我们需要找的是<code>doStartTag</code>方法，因为解析标签是从这个方法开始，具体可以参考 <a href="https://blog.csdn.net/zljjava/article/details/17420809" target="_blank" rel="noopener">TagSupport详解</a>, 通过在<code>TextFieldTag</code>类的<code>ComponentTagSupport</code>父类我们找到<code>doStartTag</code>方法</p>
+<p>当在<code>JSP</code> 文件中遇到 <code>Struts2</code>标签 时，由于s2的标签库都是集成与<code>ComponentTagSupport</code>类，程序会先调用 <code>doStartTag</code> ，并将标签中的属性设置到 <code>TextFieldTag</code>对象相应属性中。</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218154513302.png" alt="image-20201218154513302"></p>
+<p>最后，在遇到 <code>/&gt;</code>结束标签的时候调用 <code>doEndTag</code> 方法。</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152120932.png" alt="image-20201218152120932"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doEndTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.component.end(<span class="keyword">this</span>.pageContext.getOut(), <span class="keyword">this</span>.getBody());</span><br><span class="line">        <span class="keyword">this</span>.component = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">6</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们跟进<code>this.component.end</code>方法，该方法调用了 <code>this.evaluateParams();</code>方法来填充<code>JSP</code>中的动态数据。</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152528873.png" alt="image-20201218152528873"></p>
+<p>跟进<code>this.evaluateParams</code>方法，发现如果开启<code>OGNL</code>表达式支持(this.altSyntax())，会进行属性字段添加<code>OGNL</code>表达式字符(%{name})</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218152851979.png" alt="image-20201218152851979"></p>
+<p>然后使用<code>findValue</code>方法从值栈中获得该表达式所对应的值，跟进<code>findValue</code>方法</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153309872.png" alt="image-20201218153309872"></p>
+<p><code>findValue</code>在开启了<code>altSyntax</code>且<code>toType</code>为<code>class.java.lang.string</code>时调用<code>TextParseUtil.translateVariables</code>方法</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153519551.png" alt="image-20201218153519551"></p>
+<p>跟进该方法</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153626893.png" alt="image-20201218153626893"></p>
+<p>发现该方法重名加载</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218153722178.png" alt="image-20201218153722178"></p>
+<p>我们传入<code>translateVariables</code> 方法的表达式 <code>expression</code> 为 <code>%{password}</code> ，经过 <code>OGNL</code>表达式解析，程序会获得其值 <code>%{1+1}</code>(这里就是我们传入的payload)。由于此处使用的是 <code>while</code>循环来解析<code>OGNL</code> ，所以获得的<code>%{1+1}</code>又会被再次循环解析，最终也就造成了任意代码执行。</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201218154234294.png" alt="image-20201218154234294"></p>
+<p>关键代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">translateVariables</span><span class="params">(<span class="keyword">char</span> open, String expression, ValueStack stack, Class asType, TextParseUtil.ParsedValueEvaluator evaluator)</span> </span>&#123;</span><br><span class="line">        Object result = expression;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> start = expression.indexOf(open + <span class="string">"&#123;"</span>);</span><br><span class="line">            <span class="keyword">int</span> length = expression.length();</span><br><span class="line">            <span class="keyword">int</span> x = start + <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(start != -<span class="number">1</span> &amp;&amp; x &lt; length &amp;&amp; count != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">char</span> c = expression.charAt(x++);</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="string">'&#123;'</span>) &#123;</span><br><span class="line">                    ++count;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'&#125;'</span>) &#123;</span><br><span class="line">                    --count;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> end = x - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (start == -<span class="number">1</span> || end == -<span class="number">1</span> || count != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> XWorkConverter.getInstance().convertValue(stack.getContext(), result, asType);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String <span class="keyword">var</span> = expression.substring(start + <span class="number">2</span>, end);</span><br><span class="line">            Object o = stack.findValue(<span class="keyword">var</span>, asType);</span><br><span class="line">            <span class="keyword">if</span> (evaluator != <span class="keyword">null</span>) &#123;</span><br><span class="line">                o = evaluator.evaluate(o);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String left = expression.substring(<span class="number">0</span>, start);</span><br><span class="line">            String right = expression.substring(end + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (o != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.stringSet(left)) &#123;</span><br><span class="line">                    result = left + o;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result = o;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (TextUtils.stringSet(right)) &#123;</span><br><span class="line">                    result = result + right;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                expression = left + o + right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result = left + right;</span><br><span class="line">                expression = left + right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此究其原因，在于在<code>translateVariables</code>中，递归解析了表达式，在处理完<code>%{password}</code>后将<code>password</code>的值直接取出并继续在<code>while</code>循环中解析，若用户输入的<code>password</code>是恶意的<code>OGNL</code>表达式，比如<code>%{1+1}</code>，则得以解析执行。</p>
+<p>POC：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;<span class="number">1</span>+<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><p>增加了了递归解析的判断</p>
+<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224171538096.png" alt="image-20201224171538096"></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://xz.aliyun.com/t/7915" target="_blank" rel="noopener">https://xz.aliyun.com/t/7915</a></p>
+<p><a href="https://xz.aliyun.com/t/2044" target="_blank" rel="noopener">https://xz.aliyun.com/t/2044</a></p>
+<p><a href="https://dean2021.github.io/posts/s2-001/" target="_blank" rel="noopener">https://dean2021.github.io/posts/s2-001/</a></p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-001" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-001</a></p>
+
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-本文结束<i class="fa fa-paw"></i>感谢您的阅读-</div>
+    
+</div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Struts2/" rel="tag"><i class="fa fa-tag"></i>Struts2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/28/Struts2-002-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="next" title="Struts2-002 漏洞分析">
+                <i class="fa fa-chevron-left"></i> Struts2-002 漏洞分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/28/Shiro-Payload-EXP%E6%8F%90%E5%8F%96/" rel="prev" title="Shiro Payload EXP提取">
+                Shiro Payload EXP提取 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?'];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="小维同学" />
+            
+              <p class="site-author-name" itemprop="name">小维同学</p>
+              <p class="site-description motion-element" itemprop="description">努力努力再努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+		  <!-- 网易音乐播放器 -->
+			<div id="music163player">
+				
+			</div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ximcx.cn/" title="西门吹雪's Blog" target="_blank">西门吹雪's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞概要"><span class="nav-text">漏洞概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复"><span class="nav-text">修复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小维同学</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">❤  <a class="theme-link" target="_blank" href="https://scriptkid-beta.github.io/">LZL</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
