@@ -241,39 +241,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux sudo权限提升（CVE-2021-3156）漏洞复现</title>
-    <url>/2021/04/13/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/</url>
-    <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
-<div style="text-align: right"> 小维</div>
-
-<h4 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h4><p>Sudo是一个功能强大的工具，其允许普通用户执行root权限命令，大多数基于Unix和Linux的操作系统都包含sudo。</p>
-<p>2021年01月26日，sudo被披露存在一个基于堆的缓冲区溢出漏洞（CVE-2021-3156，该漏洞被命名为“Baron Samedit”），可导致本地权限提升。</p>
-<p>当sudo通过-s或-i命令行选项在shell模式下运行命令时，它将在命令参数中使用反斜杠转义特殊字符。但使用-s或 -i标志运行sudoedit时，实际上并未进行转义，从而可能导致缓冲区溢出。只要存在sudoers文件（通常是 /etc/sudoers），攻击者就可以使用本地普通用户利用sudo获得系统root权限。</p>
-<p>安全研究人员于1月26日公开披露了此漏洞，并表示该漏洞已经隐藏了近十年。</p>
-<a id="more"></a>
-
-<h4 id="受影响版本"><a href="#受影响版本" class="headerlink" title="受影响版本"></a>受影响版本</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">Sudo <span class="number">1.8</span><span class="number">.2</span> - <span class="number">1.8</span><span class="number">.31</span>p2</span><br><span class="line">Sudo <span class="number">1.9</span><span class="number">.0</span> - <span class="number">1.9</span><span class="number">.5</span>p1</span><br></pre></td></tr></table></figure>
-
-<h4 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h4><p>以非root用户登录系统，并运行<code>sudoedit -s /</code>命令</p>
-<p>响应一个以<code>sudoedit:</code>开头的报错，那么表明存在漏洞。</p>
-<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202103228116.png" alt="image-20210202103228116"></p>
-<p>响应一个以<code>usage:</code>开头的报错，那么表明补丁已经生效。</p>
-<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202114538438.png" alt="image-20210202114538438"></p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/blasty/CVE-2021-3156.git</span><br><span class="line"><span class="built_in">cd</span> CVE-2021-3156</span><br><span class="line">make</span><br><span class="line">./sudo-hax-me<span class="_">-a</span>-sandwich &lt;target_number&gt;</span><br></pre></td></tr></table></figure>
-
-<h5 id="kali-Linux-测试"><a href="#kali-Linux-测试" class="headerlink" title="kali Linux 测试"></a>kali Linux 测试</h5><p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202104425241.png" alt="image-20210202104425241"></p>
-<h4 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h4><p>官方已在sudo新版本1.9.5p2中修复了该漏洞，请受影响的用户尽快升级版本进行防护。</p>
-<p>官方下载链接：<a href="https://www.sudo.ws/download.html" target="_blank" rel="noopener">https://www.sudo.ws/download.html</a></p>
-<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202114622883.png" alt="image-20210202114622883"></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.sudo.ws/alerts/unescape_overflow.html" target="_blank" rel="noopener">https://www.sudo.ws/alerts/unescape_overflow.html</a></p>
-<p><a href="http://blog.nsfocus.net/cve-2021-3156/" target="_blank" rel="noopener">http://blog.nsfocus.net/cve-2021-3156/</a></p>
-<p><a href="https://github.com/blasty/CVE-2021-3156" target="_blank" rel="noopener">https://github.com/blasty/CVE-2021-3156</a></p>
-]]></content>
-      <tags>
-        <tag>漏洞复现</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Chrome 远程代码执行漏洞</title>
     <url>/2021/04/13/chrome%200day/</url>
     <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
@@ -300,6 +267,39 @@
 <p><img src="/img/chrome%200day/image-20210413160943095.png" alt="image-20210413160943095"></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://github.com/r4j0x00/exploits/tree/master/chrome-0day" target="_blank" rel="noopener">https://github.com/r4j0x00/exploits/tree/master/chrome-0day</a></p>
 <p><a href="https://mp.weixin.qq.com/s/dZl_Urk8cOJ1Qbe16HBFGQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/dZl_Urk8cOJ1Qbe16HBFGQ</a></p>
+]]></content>
+      <tags>
+        <tag>漏洞复现</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux sudo权限提升（CVE-2021-3156）漏洞复现</title>
+    <url>/2021/02/04/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/</url>
+    <content><![CDATA[<p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h4><p>Sudo是一个功能强大的工具，其允许普通用户执行root权限命令，大多数基于Unix和Linux的操作系统都包含sudo。</p>
+<p>2021年01月26日，sudo被披露存在一个基于堆的缓冲区溢出漏洞（CVE-2021-3156，该漏洞被命名为“Baron Samedit”），可导致本地权限提升。</p>
+<p>当sudo通过-s或-i命令行选项在shell模式下运行命令时，它将在命令参数中使用反斜杠转义特殊字符。但使用-s或 -i标志运行sudoedit时，实际上并未进行转义，从而可能导致缓冲区溢出。只要存在sudoers文件（通常是 /etc/sudoers），攻击者就可以使用本地普通用户利用sudo获得系统root权限。</p>
+<p>安全研究人员于1月26日公开披露了此漏洞，并表示该漏洞已经隐藏了近十年。</p>
+<a id="more"></a>
+
+<h4 id="受影响版本"><a href="#受影响版本" class="headerlink" title="受影响版本"></a>受影响版本</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">Sudo <span class="number">1.8</span><span class="number">.2</span> - <span class="number">1.8</span><span class="number">.31</span>p2</span><br><span class="line">Sudo <span class="number">1.9</span><span class="number">.0</span> - <span class="number">1.9</span><span class="number">.5</span>p1</span><br></pre></td></tr></table></figure>
+
+<h4 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h4><p>以非root用户登录系统，并运行<code>sudoedit -s /</code>命令</p>
+<p>响应一个以<code>sudoedit:</code>开头的报错，那么表明存在漏洞。</p>
+<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202103228116.png" alt="image-20210202103228116"></p>
+<p>响应一个以<code>usage:</code>开头的报错，那么表明补丁已经生效。</p>
+<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202114538438.png" alt="image-20210202114538438"></p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/blasty/CVE-2021-3156.git</span><br><span class="line"><span class="built_in">cd</span> CVE-2021-3156</span><br><span class="line">make</span><br><span class="line">./sudo-hax-me<span class="_">-a</span>-sandwich &lt;target_number&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="kali-Linux-测试"><a href="#kali-Linux-测试" class="headerlink" title="kali Linux 测试"></a>kali Linux 测试</h5><p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202104425241.png" alt="image-20210202104425241"></p>
+<h4 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h4><p>官方已在sudo新版本1.9.5p2中修复了该漏洞，请受影响的用户尽快升级版本进行防护。</p>
+<p>官方下载链接：<a href="https://www.sudo.ws/download.html" target="_blank" rel="noopener">https://www.sudo.ws/download.html</a></p>
+<p><img src="/img/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/image-20210202114622883.png" alt="image-20210202114622883"></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.sudo.ws/alerts/unescape_overflow.html" target="_blank" rel="noopener">https://www.sudo.ws/alerts/unescape_overflow.html</a></p>
+<p><a href="http://blog.nsfocus.net/cve-2021-3156/" target="_blank" rel="noopener">http://blog.nsfocus.net/cve-2021-3156/</a></p>
+<p><a href="https://github.com/blasty/CVE-2021-3156" target="_blank" rel="noopener">https://github.com/blasty/CVE-2021-3156</a></p>
 ]]></content>
       <tags>
         <tag>漏洞复现</tag>
