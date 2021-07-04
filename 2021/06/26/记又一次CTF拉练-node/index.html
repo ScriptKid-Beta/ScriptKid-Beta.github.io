@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node.js/image-20210626122805010.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/img/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node.js/image-20210625214459295.png">
 <meta property="article:published_time" content="2021-06-26T08:18:58.000Z">
-<meta property="article:modified_time" content="2021-06-26T09:31:00.908Z">
+<meta property="article:modified_time" content="2021-07-04T06:36:02.784Z">
 <meta property="article:author" content="小维同学">
 <meta property="article:tag" content="Python | CTF | SEC | 笔记 | Pentest | 小维同学 | 网络安全 | 博客 | 小维 | 安全导航 | JAVA">
 <meta name="twitter:card" content="summary">
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  949字
+                  975字
                 </span>
               
 
@@ -418,6 +418,7 @@
 <p>req.query 一个对象，为每一个路由中的query string参数都分配一个属性。</p>
 <p>1、不能获取原型链的属性</p>
 <p>2、如果没有query string，它就是一个空对象，属性的值为{}。</p>
+<p>3、不能获取数组[]后面=前面的值（如：<code>[]123</code>不能获取到123）</p>
 <p>…</p>
 <h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><p>根据上述特性我们可以构造成<code>getflag?__proto__=/login</code>，<code>getflag?=/login</code>等等。</p>
 <h5 id="本地环境调试"><a href="#本地环境调试" class="headerlink" title="本地环境调试"></a>本地环境调试</h5><p>1、<code>getflag?=/login</code></p>
@@ -428,6 +429,7 @@
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>xxx.xxx.com<span class="regexp">/getflag?__proto__=/</span>login</span><br></pre></td></tr></table></figure>
 
 <p><img src="/img/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1CTF%E6%8B%89%E7%BB%83-node.js/image-20210625214459295.png" alt="image-20210625214459295"></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>仅供参考~</p>
 
       
     </div>
@@ -469,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/04/%E8%AE%B0%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/" rel="prev" title="记又又一次拉练-Node.js">
+                记又又一次拉练-Node.js <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -578,7 +584,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -651,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码"><span class="nav-text">源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路解析"><span class="nav-text">思路解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初步想法"><span class="nav-text">初步想法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#本题考点"><span class="nav-text">本题考点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解题步骤"><span class="nav-text">解题步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本地环境调试"><span class="nav-text">本地环境调试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CTF环境"><span class="nav-text">CTF环境</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码"><span class="nav-text">源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路解析"><span class="nav-text">思路解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初步想法"><span class="nav-text">初步想法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#本题考点"><span class="nav-text">本题考点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解题步骤"><span class="nav-text">解题步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本地环境调试"><span class="nav-text">本地环境调试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CTF环境"><span class="nav-text">CTF环境</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后"><span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
