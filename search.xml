@@ -9,6 +9,8 @@
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇文章记述了又又又一次的CTF拉练，一道php审计题~</p>
 <h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment"># upload www-data rwx</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'path'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'data'</span>])) &#123;</span><br><span class="line">    $data = <span class="string">"&lt;?php\ndie('no php');\n?&gt;\n"</span>;</span><br><span class="line">    $content = $data.base64_decode($_GET[<span class="string">'data'</span>]);</span><br><span class="line">    file_put_contents($_GET[<span class="string">'path'</span>], $content);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'OK'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <h4 id="思路解析"><a href="#思路解析" class="headerlink" title="思路解析"></a>思路解析</h4><p>首先分析代码, 注释提示上传路径upload，判断GET请求是否有path、data参数，file_put_contents写入文件名(filename)为path参数的值，内容(content)为<code>&lt;?php\ndie(&#39;no php&#39;);\n?&gt;\n</code>拼接base64_decode(data参数的值)。</p>
 <h4 id="初步想法"><a href="#初步想法" class="headerlink" title="初步想法"></a>初步想法</h4><p>想要GetShell的话，就必须把<code>die(&#39;no php&#39;)</code>给干掉。</p>
 <h4 id="本题考点"><a href="#本题考点" class="headerlink" title="本题考点"></a>本题考点</h4><p>die() 函数输出一条消息，并退出当前脚本。该函数是 exit() 函数的别名。</p>
@@ -34,7 +36,7 @@
 <p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142123931.png" alt="image-20211011142123931"></p>
 <p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011141958762.png" alt="image-20211011141958762"></p>
 <p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011170414108.png" alt="image-20211011170414108"></p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>有很多种方式，仅供参考~</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>仅供参考~</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a></p>
 <p><a href="https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/" target="_blank" rel="noopener">https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/</a></p>
 ]]></content>
